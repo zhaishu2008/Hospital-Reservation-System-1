@@ -147,6 +147,7 @@
     if(user) {
         var previous = document.referrer;
         
+        
     if(previous.indexOf("Selct")>0)
    {
        window.alert("please select department and doctor");
@@ -185,29 +186,31 @@ $("#comfirm").click(function(){
     Department: $("#depart").text()
   }).then(function(){
     console.log("success");
+    
   }).catch(function(err){
     console.error("error：",err);
   });
-  });
-  window.alert("Making appointment successfully");
-  window.location.href="MakeappointmentHome";
   
-   /*     var doctorappointmentRef = firebase.database().ref('/Doctor/'+doctor.uid);
+ 
+  
+   var doctorappointmentRef = firebase.database().ref('/Doctor/'+doctor.uid);
     doctorappointmentRef.push().set({
      uid: user.uid,
      Patient: patientname,
     Time: $("#Time").val(),
     Date: $("#Date").val(),
-    Comments: $("#comments").val(),
-    Department: $("#doctor").val()
+    Comments: $("#comments").val()
+    
   }).then(function(){
     console.log("success");
+     window.alert("Making appointment successfully");
+  window.location.href="MakeappointmentHome";
   }).catch(function(err){
     console.error("error：",err);
   });
-}*/
-});}
-}});
+
+});});
+}}});
 
 
 window.onload = load();

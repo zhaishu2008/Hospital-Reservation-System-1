@@ -84,10 +84,19 @@
          <div class="right" >Add User
             
              <div class="text"><div class="column"></div><div class="column"><div class="h3">First Name</div><input type="text" id="fname" placeholder="Your First name" style="height: 30px;">
-                 <div class="h3">Phone</div><input id="number" type="text" placeholder="000-000-0000" style="height: 30px;"></div>
+                 <div class="h3">Phone</div><input id="number" type="text" placeholder="000-000-0000" style="height: 30px;">
+                 <input id="loginEmail" type="text" placeholder="email" style="height: 30px;">
+                 </div>
                  <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" id="lastname" placeholder="Your Last name" style="height: 30px;">
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
+                 <input id="loginPassword" type="text" placeholder="password" style="height: 30px;">
                  </div>
+                 <label class="radio-inline">
+  <input type="radio" name="gender" id="sex1" value="male" checked="checked"> Male
+
+
+  <input type="radio" name="gender" id="sex2" value="female"> Female
+</label>
                  <br>
                  <br><br><br>
                 
@@ -108,13 +117,20 @@
     
 
    function addUser(){
+       var useremail = $("#loginEmail").val();
+                      var userpassword = $("#loginPassword").val();
   firebase.auth().onAuthStateChanged(function(user){
     if(user) {
+        
         var appointmentRef = firebase.database().ref('/Users');
     appointmentRef.push().set({
+        Email: useremail,
+        Password: userpassword,
     Lastname: $("#lname").val(),
     Firstname: $("#fname").val(),
     PhoneNum: $("#number").val(),
+    Gender: $("input:radio[name='gender']:checked").val(),
+    isstaff: 0
      DOB: $("#dob").val()
   }).then(function(){
     console.log("success");
@@ -124,6 +140,14 @@
         
    window.alert("Add User successfully");
   }}); 
+
+                      
+    firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+ 
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  window.alert("Error: " + errorMessage);
+    });
    }
    
 </script>
