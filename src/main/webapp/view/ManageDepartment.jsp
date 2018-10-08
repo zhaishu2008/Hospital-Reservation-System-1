@@ -91,17 +91,40 @@
         <div> <a href="AdminAddDepart.jsp">
        <img src="../images/add.png" width="8%" height="30px">
                          </a></div>
-            <div class="h6">Ophthalmology</div><br>
-            <div class="h6">Oncology</div><br>
-            <div class="h6">Orthopaedic Surgery</div><br>
-            <div class="h6">Surgical Clinic</div><br>
-            <div class="h6">Gynecology </div><br>
-            <div class="h6">Neurology</div><br>
-            <div class="h6">Endoscopy</div>
+            <div id="addDepart">
+            
         </div>
     </div>
-
+</div>
    </div>
  </h1>
+
+
+<script>
+    window.onload=onload();
+    function onload(){
+    var addDepart = "";
+var myArray=new Array();
+var leadsRef = firebase.database().ref('/Departments');
+
+
+leadsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val().Name;
+      console.log(childData);
+     myArray.push(childData);
+     
+     
+    });
+     console.log(myArray);
+     var len = myArray.length;
+for(var i=0;i<len; i++){
+   addDepart = addDepart + '<div class="h6" onclick="selectDepart()">'+ myArray[i]+"</div><br>";
+   }
+   $("#addDepart").html(addDepart);
+});}
+ 
+</script>
     </body>
+    
 </html>

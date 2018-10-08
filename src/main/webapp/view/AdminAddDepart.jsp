@@ -113,7 +113,7 @@
         var appointmentRef = firebase.database().ref('/Departments');
     appointmentRef.push().set({
     
-     DepartName: department
+     Name: department
   }).then(function(){
     console.log("success");
   }).catch(function(err){

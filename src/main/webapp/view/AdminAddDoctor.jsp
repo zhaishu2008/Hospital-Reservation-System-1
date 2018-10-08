@@ -85,12 +85,20 @@
          <div class="right" >Add Doctor
             
              <div class="text"><div class="column"></div><div class="column"><div class="h3">First Name</div><input type="text" id="fname" placeholder="Your First name" style="height: 30px;">
-                 <div class="h3">Phone</div><input id="number" type="text" placeholder="000-000-0000" style="height: 30px;"></div>
+                 <div class="h3">Phone</div><input id="number" type="text" placeholder="000-000-0000" style="height: 30px;">
+                 <div class="h3">Email</div><input id="loginEmail" type="text" placeholder="email" style="height: 30px;"></div>
                  <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" id="lastname" placeholder="Your Last name" style="height: 30px;">
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
-                 
+                 <div class="h3">Password</div><input id="loginPassword" type="text" placeholder="password" style="height: 30px;">
             </div>
                  <div class="h3">Comments</div><textarea id="comments" rows="4" cols="40"></textarea>
+                 <div class="h3">Gender</div>
+                 <label class="radio-inline">
+  <input type="radio" name="gender" id="sex1" value="male" checked="checked"> Male
+
+
+  <input type="radio" name="gender" id="sex2" value="female"> Female
+</label>
                  <br>
                  <br><br><br>
                 
@@ -111,23 +119,35 @@
     
 
    function addDoctor(){
-  firebase.auth().onAuthStateChanged(function(user){
+       var useremail = $("#loginEmail").val();
+                      var userpassword = $("#loginPassword").val();
+                      firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+ 
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  window.alert("Error: " + errorMessage);
+    });
+        
+        firebase.auth().onAuthStateChanged(function(user){
     if(user) {
-        var appointmentRef = firebase.database().ref('/Doctors');
-    appointmentRef.push().set({
+        firebase.database().ref('Doctors/'+user.uid).set({
+    Email: useremail,
+        Password: userpassword,
     Lastname: $("#lname").val(),
     Firstname: $("#fname").val(),
     PhoneNum: $("#number").val(),
+    Gender: $("input:radio[name='gender']:checked").val(),
+    isstaff: "1",
      DOB: $("#dob").val(),
-     Comments: $("#comments").val()
-  }).then(function(){
-    console.log("success");
-  }).catch(function(err){
-    console.error("error：",err);
-  });
+      Comments: $("#comments").val()
+  });   
+    
+    window.alert("Add Doctor successfully");
         
-   window.alert("Add Doctor successfully");
+   
   }}); 
+       
+  
    }
    
 </script>

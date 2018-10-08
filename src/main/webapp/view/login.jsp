@@ -102,18 +102,18 @@ firebase.auth().onAuthStateChanged(function(user){
              }
     firebase.database().ref('/Users/' + uid).once('value').then(function(snapshot) {
         var isStaff = snapshot.val().IsStaff;
-        if (isStaff==1){
-            window.location.href="DoctorHomepage.jsp";
-        }
-     else{
-    
-        
+        if (isStaff==0){
+           
      window.alert("Log in successfully");
   window.location.href='Homepage.jsp';
   
   console.log(uid);
         
      }
+     else{ window.location.href="DoctorHomepage.jsp";}
+   
+    
+        
  });
         }    });}
            

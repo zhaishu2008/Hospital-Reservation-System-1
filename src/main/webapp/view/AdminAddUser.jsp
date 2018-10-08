@@ -115,12 +115,17 @@
    function addUser(){
        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
-  firebase.auth().onAuthStateChanged(function(user){
-    if(user) {
+                      firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+ 
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  window.alert("Error: " + errorMessage);
+    });
         
-        var appointmentRef = firebase.database().ref('/Users');
-    appointmentRef.push().set({
-        Email: useremail,
+        firebase.auth().onAuthStateChanged(function(user){
+    if(user) {
+        firebase.database().ref('Users/'+user.uid).set({
+    Email: useremail,
         Password: userpassword,
     Lastname: $("#lname").val(),
     Firstname: $("#fname").val(),
@@ -128,23 +133,13 @@
     Gender: $("input:radio[name='gender']:checked").val(),
     isstaff: "0",
      DOB: $("#dob").val()
-  }).then(function(){
-    console.log("success");
-  }).catch(function(err){
-    console.error("error：",err);
-  });
+  });   
+    
+    window.alert("Add User successfully");
         
    
   }}); 
 
-                      
-    firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
- 
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  window.alert("Error: " + errorMessage);
-    });
-    window.alert("Add User successfully");
    }
    
 </script>
