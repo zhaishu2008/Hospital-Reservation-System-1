@@ -124,7 +124,7 @@ leadsRef.on('value', function(snapshot) {
     console.log(dn);
      var len = dn.length;
 for(var i=0;i<len; i++){
-   addDepart = addDepart + '<button class="accordion" style="width: 550px;">Appointment '+(i+1)+dn[i]+tm[i]+'</button><div class="panel" style="text-align: left;"><p>Appointment<br>Date:  '
+   addDepart = addDepart + '<button class="accordion" id="accordion" onclick="click()" style="width: 550px;">Appointment '+(i+1)+dn[i]+tm[i]+'</button><div class="panel" style="text-align: left;"><p>Appointment<br>Date:  '
    +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
    }
    $("#add").html(addDepart);
@@ -133,8 +133,9 @@ for(var i=0;i<len; i++){
  }
  });}
 
-
-          var acc = document.getElementsByClassName("accordion");
+function click(){
+    console.log("run");
+          var acc =getElementById("accordion");
           var i;
            for(i = 0; i< acc.length;i++){
                acc[i].addEventListener("click",function(){
@@ -146,7 +147,7 @@ for(var i=0;i<len; i++){
                    panel.style.display = "block";
                }
                });
-           }
+           }}
           </script>
 
           </div>
