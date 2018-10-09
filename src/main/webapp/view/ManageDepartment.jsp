@@ -101,6 +101,8 @@
 
 
 <script>
+    function Dedepart(){}
+    
     window.onload=onload();
     function onload(){
     var addDepart = "";
@@ -119,7 +121,7 @@ leadsRef.on('value', function(snapshot) {
      console.log(myArray);
      var len = myArray.length;
 for(var i=0;i<len; i++){
-   addDepart = addDepart + '<div class="h6" onclick="selectDepart()">'+ myArray[i]+"</div><br>";
+   addDepart = addDepart + '<div class="h6" onclick="selectDepart()">'+ myArray[i]+'</div><input type="button" onclick="Dedepart" value="Delect"><br>';
    }
    $("#addDepart").html(addDepart);
 });}

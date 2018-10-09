@@ -204,7 +204,7 @@ $("#comfirm").click(function(){
   }).then(function(){
     console.log("success");
      window.alert("Making appointment successfully");
-  window.location.href="MakeappointmentHome";
+  window.location.href="MakeappointmentHome.jsp";
   }).catch(function(err){
     console.error("error：",err);
   });

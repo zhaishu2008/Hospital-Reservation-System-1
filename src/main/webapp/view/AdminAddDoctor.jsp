@@ -121,6 +121,7 @@
    function addDoctor(){
        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
+                      
                       firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
  
   var errorCode = error.code;

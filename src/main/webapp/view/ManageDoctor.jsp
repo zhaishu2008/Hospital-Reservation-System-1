@@ -123,6 +123,11 @@
     </div>
   </h1>
   <script>
+      
+      function DeDoctor(){
+          
+      }
+      
         function myFunction(x){
                  var popup = document.getElementById(x);
                  popup.classList.toggle("show");
@@ -155,7 +160,7 @@ console.log(ln);
      var len = ln.length;
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
-           +fn[i]+ln[i]+'</p></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show Doctor Information<span class="popuptext" id="'+i+'">'
+           +fn[i]+ln[i]+'</p><input type="button" onclick="DeDoctor" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show Doctor Information<span class="popuptext" id="'+i+'">'
    +dp[i]+'</span></div></div></div></div></div><br>';
    }
    $("#add").html(addDepart);
