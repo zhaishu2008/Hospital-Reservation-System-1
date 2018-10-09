@@ -93,7 +93,7 @@
              <div class="sbox"><div class="txt1">
              <div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" >
              <div class="column4">
-                 <div class="h4" ><br><p>Shan Wilson</p></div></div>
+                 <div class="h4" ><br><p>Shan Wilson</p><input type="button" id="DeDoctor" value="Delect"></div></div>
                  </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="1">SADshagd ashjh LS  fhieu dsf sdadasdada
               sadasdada</span></div>
 
