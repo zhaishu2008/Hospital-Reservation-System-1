@@ -118,7 +118,7 @@ leadsRef.on('value', function(snapshot) {
         var time = childSnapshot.val().Time;
          var depart = childSnapshot.val().Department;
          var comments=childSnapshot.val().Comments;
-     console.log(childSnapshot.val());
+     
      dn.push(doctorname);
      da.push(date);
      tm.push(time);
@@ -126,20 +126,14 @@ leadsRef.on('value', function(snapshot) {
      co.push(comments);
      
     });
-    console.log(dn);
+    
      var len = dn.length;
 for(var i=0;i<len; i++){
-   addDepart = addDepart + '<button class="accordion" id="xx" onclick="click()" style="width: 550px;">Appointment '+(i+1)+'</button><div class="panel" style="text-align: left;"><p>Appointment<br>Date:  '
+   addDepart = addDepart + '<button class="accordion" id="accordion" style="width: 550px;">Appointment '+(i+1)+'</button><div class="panel" style="text-align: left;"><p>Appointment<br>Date:  '
    +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
    }
    $("#add").html(addDepart);
-   console.log(addDepart);
-});
- }
- });}
-
-function click(){
-    console.log("run");
+   console.log("run");
           var acc =document.getElementsByClassName("accordion");
           var i;
            for(i = 0; i< acc.length;i++){
@@ -152,7 +146,16 @@ function click(){
                    panel.style.display = "block";
                }
                });
-           }}
+           }
+});
+
+ }
+ });
+ 
+    }
+
+
+    
           </script>
 
         
