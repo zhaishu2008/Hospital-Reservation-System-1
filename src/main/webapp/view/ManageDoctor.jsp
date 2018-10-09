@@ -89,6 +89,7 @@
              <div> <a href="AdminAddDoctor.jsp">
        <img src="../images/add.png" width="8%" height="30px">
                          </a></div>
+             <div id="add">
              <div class="sbox"><div class="txt1">
              <div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" >
              <div class="column4">
@@ -114,7 +115,7 @@
               sadasdada</span></div>
 
                  </div></div></div></div>
-
+             </div>
          </div>
 
      </div>
@@ -136,6 +137,38 @@
              function myFunctions(){
                  var popup = document.getElementById("myPopupx");
                  popup.classList.toggle("show");
+             }
+             
+             window.onload=onload();
+             function onload(){
+                 var addDepart =  "";
+var ln=new Array();
+var fn=new Array();
+var dp=new Array();
+var leadsRef = firebase.database().ref('/Doctors');
+
+
+leadsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var lastname = childSnapshot.val().Lastname;
+      var firstname = childSnapshot.val().Firstname;
+      var description = childSnapshot.val().Description;
+      
+     ln.push(lastname);
+     fn.push(firstname);
+     dp.push(description);
+     
+     
+    });
+console.log(ln);
+     var len = ln.length;
+for(var i=0;i<len; i++){
+   addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
+           +fn[i]+ln[i]+'</p></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="myPopup">'
+   +dp[i]+'</span></div></div></div></div></div><br>';
+   }
+   $("#add").html(addDepart);
+}); 
              }
 
 </script>

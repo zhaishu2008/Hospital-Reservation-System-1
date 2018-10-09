@@ -103,10 +103,10 @@
                      <form><input type="text" name="selecteddoctor" id="selectedDoctor"value="dd" style="visibility:hidden"></form>
 
          </div></div>
-         <div class="boxright"><div class="sbox"><div class="txt1">
+         <div class="boxright" id="add"><div class="sbox"><div class="txt1">
              <div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" >
              <div class="column4">
-                 <div class="h4" ><br><p onclick="selectDoctor()">Shan Wilson</p></div></div>
+            <div class="h4" ><br><p onclick="selectDoctor()">Shan Wilson</p></div></div>
                  </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="myPopup">SADshagd ashjh LS  fhieu dsf sdadasdada
               Excellent</span></div>
 
@@ -124,7 +124,8 @@
              <div class="card"><div class="column3"><img src="ss.jpeg" alt="qp" style="width:100%"></div><div class="container" >
              <div class="column4">
                  <div class="h4" ><br><p onclick="selectDoctor()">Ko Lisdwa</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">adadada as ada   ada dad   dffffaa a asdadadadada
+                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">
+                                 adadada as ada   ada dad   dffffaa a asdadadadada
               sadasdada</span></div>
 
                  </div></div></div></div>
@@ -197,25 +198,33 @@ console.log(txt);
      
     }
 });
- var addDepart =  '<div class="boxright">';
-var myArray=new Array();
-var leadsRef = firebase.database().ref('/Departments');
+ var addDepart =  "";
+var ln=new Array();
+var fn=new Array();
+var dp=new Array();
+var leadsRef = firebase.database().ref('/Doctors');
 
 
 leadsRef.on('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
-      var childData = childSnapshot.val().Name;
-      console.log(childData);
-     myArray.push(childData);
+      var lastname = childSnapshot.val().Lastname;
+      var firstname = childSnapshot.val().Firstname;
+      var description = childSnapshot.val().Description;
+      
+     ln.push(lastname);
+     fn.push(firstname);
+     dp.push(description);
      
      
     });
-console.log(myArray);
-     var len = myArray.length;
+console.log(ln);
+     var len = ln.length;
 for(var i=0;i<len; i++){
-   addDepart = addDepart + '<div class="h6">'+ myArray[i]+"</div><br>";
+   addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
+           +fn[i]+ln[i]+'</p></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">'
+   +dp[i]+"</span></div></div></div></div></div><br>";
    }
-   $("#addDepart").html(addDepart);
+   $("#add").html(addDepart);
 }); 
 }
 </script>

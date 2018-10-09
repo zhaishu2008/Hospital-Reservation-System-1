@@ -97,25 +97,26 @@ firebase.auth().onAuthStateChanged(function(user){
         if(user) {
             
              var uid = user.uid;
-             if (uid.indexOf("AZb6cOObuOG5e1m0pQ")>0){
+             if (uid.indexOf("7oRThGdNZ71QVmORJ")>0){
                  window.location.href="Admin.jsp";
              }
+            
     firebase.database().ref('/Users/' + uid).once('value').then(function(snapshot) {
-        var isStaff = snapshot.val().IsStaff;
-        if (isStaff==0){
+        isStaff = snapshot.val();
+        if (isStaff!=null){
            
      window.alert("Log in successfully");
   window.location.href='Homepage.jsp';
   
   console.log(uid);
         
-     }
-     else{ window.location.href="DoctorHomepage.jsp";}
-   
+     }else{
+     window.location.href="DoctorHomepage.jsp";
+ }
     
         
  });
-        }    });}
+        }});} 
            
           
            

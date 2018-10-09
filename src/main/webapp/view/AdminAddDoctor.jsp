@@ -91,7 +91,7 @@
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
                  <div class="h3">Password</div><input id="loginPassword" type="text" placeholder="password" style="height: 30px;">
             </div>
-                 <div class="h3">Comments</div><textarea id="comments" rows="4" cols="40"></textarea>
+                 <div class="h3">description</div><textarea id="description" rows="4" cols="40"></textarea>
                  <div class="h3">Gender</div>
                  <label class="radio-inline">
   <input type="radio" name="gender" id="sex1" value="male" checked="checked"> Male
@@ -139,7 +139,7 @@
     Gender: $("input:radio[name='gender']:checked").val(),
     isstaff: "1",
      DOB: $("#dob").val(),
-      Comments: $("#comments").val()
+      Description $("#description").val()
   });   
     
     window.alert("Add Doctor successfully");
