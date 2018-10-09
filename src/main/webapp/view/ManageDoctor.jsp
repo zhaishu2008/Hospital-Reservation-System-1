@@ -94,7 +94,7 @@
              <div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" >
              <div class="column4">
                  <div class="h4" ><br><p>Shan Wilson</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="myPopup">SADshagd ashjh LS  fhieu dsf sdadasdada
+                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="1">SADshagd ashjh LS  fhieu dsf sdadasdada
               sadasdada</span></div>
 
                  </div></div></div></div>
@@ -103,7 +103,7 @@
              <div class="card"><div class="column3"><img src="as.jpeg" alt="qp" style="width:100%"></div><div class="container" >
              <div class="column4">
                  <div class="h4" ><br><p>Petter pianapple</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctiona()">Show Doctor Information<span class="popuptext" id="myPopups">asas Li Bei Lei 大坏蛋大笨猪 猪猪猪猪 猪猪猪 猪猪猪</span></div>
+                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctiona()">Show Doctor Information<span class="popuptext" id="2">asas Li Bei Lei 大坏蛋大笨猪 猪猪猪猪 猪猪猪 猪猪猪</span></div>
 
                  </div></div></div></div>
              <br>
@@ -111,7 +111,7 @@
              <div class="card"><div class="column3"><img src="ss.jpeg" alt="qp" style="width:100%"></div><div class="container" >
              <div class="column4">
                  <div class="h4" ><br><p>Ko Lisdwa</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">adadada as ada   ada dad   dffffaa a asdadadadada
+                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="3">adadada as ada   ada dad   dffffaa a asdadadadada
               sadasdada</span></div>
 
                  </div></div></div></div>
@@ -123,21 +123,12 @@
     </div>
   </h1>
   <script>
-
-             function myFunction(){
-                 var popup = document.getElementById("myPopup");
+        function myFunction(x){
+                 var popup = document.getElementById(x);
                  popup.classList.toggle("show");
              }
 
-             function myFunctiona(){
-                 var popup = document.getElementById("myPopups");
-                 popup.classList.toggle("show");
-             }
-
-             function myFunctions(){
-                 var popup = document.getElementById("myPopupx");
-                 popup.classList.toggle("show");
-             }
+            
              
              window.onload=onload();
              function onload(){
@@ -164,7 +155,7 @@ console.log(ln);
      var len = ln.length;
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
-           +fn[i]+ln[i]+'</p></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="myPopup">'
+           +fn[i]+ln[i]+'</p></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="'+i'">'
    +dp[i]+'</span></div></div></div></div></div><br>';
    }
    $("#add").html(addDepart);
