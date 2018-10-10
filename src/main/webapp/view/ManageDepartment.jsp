@@ -113,7 +113,7 @@ var leadsRef = firebase.database().ref('/Departments');
 leadsRef.on('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       var childData = childSnapshot.val().Name;
-      console.log(childData);
+      console.log(childSnapshot.val());
      myArray.push(childData);
      
      
