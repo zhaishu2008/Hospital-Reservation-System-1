@@ -6,7 +6,7 @@
     <artifactId>HospitalReservationSystem</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>HospitalReservationSystem Maven Webapp</name>
+    <name>HospitalReservationSystem</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -108,6 +108,15 @@
                    <pluginManagement>
 
         <plugins>
+            
+            <plugin>
+        <groupId>com.heroku.sdk</groupId>
+        <artifactId>heroku-maven-plugin</artifactId>
+        <version>2.0.6</version>
+        <configuration>
+  <appName>intense-island-72041</appName>
+</configuration>
+      </plugin>
 
             <plugin>
                 <groupId>com.google.appengine</groupId>
