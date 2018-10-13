@@ -95,11 +95,12 @@
      </div>
      <div class="right" >
          <div class="boxleft">Booking Now
-             <div class="text"><br><br><div class="h3"><a id="depart" onclick="selectDepart()" href="MakeappointmentDepart.jsp">Select Department</a></div>
+             <div class="text"><br><br><div class="h3"><a id="depart" onclick="selectDepart()" href="MakeappointmentDepart.jsp">dddd</a></div>
+             <div class="h3">Back to Select Department</div>
            <br>
                  
            <br>
-           <div class="h3"><a href="MakeappointmentTime.jsp">Select Time</a></div>
+         
                      <form><input type="text" name="selecteddoctor" id="selectedDoctor"value="dd" style="visibility:hidden"></form>
 
          </div></div>
@@ -177,9 +178,10 @@ var url="MakeappointDepart.jsp"+"?"+department+"&"+Doctor;
     
 window.onload = load();
 function load(){
+    var depart;
     firebase.auth().onAuthStateChanged(function(user){
     if(user) {
-        var url=location.href; 
+        var url=decodeURI(location.href); 
 
  console.log(url);
   var previous = document.referrer;
@@ -187,7 +189,7 @@ function load(){
   
       console.log(url);
 var txt=url.split("?")[1];
-var depart=txt.split("&")[0];
+depart=txt.split("&")[0];
 
 var doctor=txt.split("&")[1];
 console.log(txt);
@@ -202,7 +204,10 @@ console.log(txt);
 var ln=new Array();
 var fn=new Array();
 var dp=new Array();
+var dep=new Array();
 var leadsRef = firebase.database().ref('/Doctors');
+
+
 
 
 leadsRef.on('value', function(snapshot) {
@@ -210,19 +215,22 @@ leadsRef.on('value', function(snapshot) {
       var lastname = childSnapshot.val().Lastname;
       var firstname = childSnapshot.val().Firstname;
       var description = childSnapshot.val().Description;
-      
+       var department = childSnapshot.val().Department;
+       
      ln.push(lastname);
      fn.push(firstname);
      dp.push(description);
+     dep.push(department);
      
      
     });
-console.log(ln);
+console.log(dep);
      var len = ln.length;
 for(var i=0;i<len; i++){
+    if (dep[i]==depart){
    addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
-           +fn[i]+ln[i]+'</p></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">'
-   +dp[i]+"</span></div></div></div></div></div><br>";
+           +fn[i]+' '+ln[i]+'</p></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">'
+   +dp[i]+"</span></div></div></div></div></div><br>";}
    }
    $("#add").html(addDepart);
 }); 

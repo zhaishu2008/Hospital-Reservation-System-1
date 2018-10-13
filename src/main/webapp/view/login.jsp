@@ -102,7 +102,7 @@ firebase.auth().onAuthStateChanged(function(user){
              }
             
     firebase.database().ref('/Users/' + uid).once('value').then(function(snapshot) {
-        isStaff = snapshot.val();
+       var isStaff = snapshot.val();
         if (isStaff!=null){
            
      window.alert("Log in successfully");

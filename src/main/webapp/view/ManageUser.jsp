@@ -85,37 +85,14 @@
            <br>
            <div class="h3"><a href="ManageUser.jsp">User</a></div>
          </div></div>
-         <div class="boxright"><div class="sbox"><div class="txt1">
-                     <div> <a href="AdminAddUser.jsp">
+         <div class="boxright">
+             <div> <a href="AdminAddUser.jsp">
        <img src="../images/add.png" width="8%" height="30px">
                          </a></div>
-                      
-                      
-                    
-             <div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Better Jeson</p><input type="button" onclick="DeDoctor" value="Delect"></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="myPopup">Dtsaswdad ashjh LS  fhieu dsf sdadasdada
-              sadasdada</span></div>
-
-                 </div></div></div></div>
-             <br>
-             <div  class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="as.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Wollio Chen</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctiona()">Show Doctor Information<span class="popuptext" id="myPopups">asas Li Bei Lei 大坏蛋大笨猪 猪猪猪猪 猪猪猪 猪猪猪</span></div>
-
-                 </div></div></div></div>
-             <br>
-             <div class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="ss.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Weason Aliex</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">Dasz sdw Wsacasadad  ada dad   dffffaa a asdadadadada
-              sadasdada</span></div>
-
-                 </div></div></div></div>
+            
+        <div id="add">
+            
+             </div>
 
          </div>
 
@@ -124,48 +101,62 @@
     </div>
   </h1>
   <script>
-
-             function myFunction(){
-                 var popup = document.getElementById("myPopup");
+      var uid;
+      function DeDoctor(emm){
+        
+         var departre = firebase.database().ref("Users").orderByChild("Email").equalTo(
+               emm);
+      departre.on("child_added", snap => { 
+          uid = snap.key;
+          console.log(uid);
+      });
+      
+     
+      firebase.database().ref('/Users/'+uid).remove();
+      window.alert("Delete Successfully");
+     location.reload();
+          
+      }
+      
+function myFunction(x){
+                 var popup = document.getElementById(x);
                  popup.classList.toggle("show");
              }
 
-             function myFunctiona(){
-                 var popup = document.getElementById("myPopups");
-                 popup.classList.toggle("show");
-             }
-
-             function myFunctions(){
-                 var popup = document.getElementById("myPopupx");
-                 popup.classList.toggle("show");
-             }
-             
 window.onload=onload();
-function onload(){
-    var myArray=new Array();
+             function onload(){
+                 var addDepart =  "";
+var ln=new Array();
+var fn=new Array();
+var db=new Array();
+var em=new Array();
+
+
 var leadsRef = firebase.database().ref('/Users');
+
 
 leadsRef.on('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
-      var childData = childSnapshot.val().Email;
-     myArray.push(childData);
-      
+      var lastname = childSnapshot.val().Lastname;
+      var firstname = childSnapshot.val().Firstname;
+      var dob = childSnapshot.val().DOB;
+       var email = childSnapshot.val().Email;
+     ln.push(lastname);
+     fn.push(firstname);
+     db.push(dob);
+     em.push(email);
      
     });
-    console.log(myArray);
-   console.log(myArray.length);
-var addUser = "";
-var lenn=myArray.length;
-for(var i=0;i<lenn;i++){
-    addUser = addUser+myArray[i];
-        console.log(i);
-    console.log(myArray[i]);
-}
-console.log(addUser);
-$("#add").text("addUserasddad");
-});
-
-}
+console.log(ln);
+     var len = ln.length;
+for(var i=0;i<len; i++){
+   addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
+           +fn[i]+' '+ln[i]+'</p><input type="button" onclick="DeUser('+em[i]+')" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show Doctor Information<span class="popuptext" id="'+i+'">'
+   +dob[i]+'</span></div></div></div></div></div><br>';
+   }
+   $("#add").html(addDepart);
+}); 
+             }
 
     
 </script>

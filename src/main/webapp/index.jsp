@@ -52,19 +52,21 @@
         
         $("#lgbtn").html("My account");
         $("#lgbtn").click(function(){
-            if (uid.indexOf("AZb6cOObuOG5e1m0pQ")>0){
+            if (uid.indexOf("7oRThGdNZ71QVmORJ")>0){
                  window.location.href="./view/Admin.jsp";
              }
             firebase.database().ref('/Users/' + uid).once('value').then(function(snapshot) {
-        var isStaff = snapshot.val().IsStaff;
+        var isStaff = snapshot.val();
         
-        if (isStaff==1){
-            window.location.href="./view/DoctorHomepage.jsp";
+        if (isStaff!=null){
+             window.location.href="./view/Homepage.jsp";
         }
      else{
-    window.location.href="./view/Homepage.jsp";}
+   window.location.href="./view/DoctorHomepage.jsp";}
+ 
+        });
     });
-   });
+   
          $("#smbtn").html("Log out");
          $("#smbtn").click(function(){firebase.auth().signOut().then(function() {window.location.herf="index.jsp";
 }).catch(function(error) {

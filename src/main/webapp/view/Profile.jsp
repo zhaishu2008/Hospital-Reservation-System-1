@@ -134,7 +134,8 @@
         firebase.database().ref('Users/'+user.uid).update({
     Lastname: $("#lname").val(),
     Firstname: $("#fname").val(),
-    PhoneNum: $("#number").val()
+    PhoneNum: $("#number").val(),
+    DOB: $("#dob").val()
     
   });  
    window.alert("save successfully");

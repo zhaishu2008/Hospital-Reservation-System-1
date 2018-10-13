@@ -77,7 +77,7 @@
    <div class="h2"><button id="logout" class="LogOutBt">Log out</button></div>
 
     </div>
-    <div class="right" >Booking Now
+    <div class="right" >System Management
         <div class="text"><br><br><div class="h3"><a href="ManageDoctor.jsp">Doctor</a></div>
           <br>
           <div class="h3"><a href="ManageDepartment.jsp">Department</a></div>

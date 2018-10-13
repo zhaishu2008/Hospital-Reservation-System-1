@@ -136,7 +136,7 @@
   });   
     
     window.alert("Add User successfully");
-        
+        window.location.href="ManageUser.jsp";
    
   }}); 
 

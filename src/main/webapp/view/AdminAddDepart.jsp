@@ -121,6 +121,7 @@
   });
         
    window.alert("Add Department successfully");
+   window.location.href="ManageDepartment.jsp";
   }}); 
    }
    

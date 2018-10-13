@@ -99,6 +99,9 @@
 
   <input type="radio" name="gender" id="sex2" value="female"> Female
 </label>
+                 <div class="h3">Select Department</div>
+                 <select id="select" name="modelId">
+                 </select>
                  <br>
                  <br><br><br>
                 
@@ -119,6 +122,19 @@
     
 
    function addDoctor(){
+       var departID;
+       var wholeName = $("#fname").val()+" "+$("#lname").val();
+       var depart = $("#select").find("option:selected").text();
+       console.log(depart);
+       
+       var hey = firebase.database().ref('/Departments').orderByChild('Name').equalTo(
+               depart);
+      hey.on("child_added", snap => { 
+          departID = snap.key;
+          console.log(departID);
+        
+      });
+       
        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
                       
@@ -128,22 +144,30 @@
   var errorMessage = error.message;
   window.alert("Error: " + errorMessage);
     });
-        
+        firebase.database().ref('Departments/'+departID+'/Doctors').push().set({
+    Doctor: wholeName
+    
+  });  
         firebase.auth().onAuthStateChanged(function(user){
     if(user) {
+        
+        console.log(wholeName);
         firebase.database().ref('Doctors/'+user.uid).set({
     Email: useremail,
-        Password: userpassword,
+     Password: userpassword,
     Lastname: $("#lname").val(),
     Firstname: $("#fname").val(),
     PhoneNum: $("#number").val(),
+    WholeName: wholeName,
+    Department: depart,
     Gender: $("input:radio[name='gender']:checked").val(),
     isstaff: "1",
      DOB: $("#dob").val(),
-      Description $("#description").val()
+      Description: $("#description").val()
   });   
     
     window.alert("Add Doctor successfully");
+    window.location.href="ManageDoctor.jsp";
         
    
   }}); 
@@ -151,6 +175,31 @@
   
    }
    
+   
+   
+   window.onload = load();
+   function load(){
+      
+var myArray=new Array();
+var leadsRef = firebase.database().ref('/Departments');
+
+
+leadsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val().Name;
+      console.log(childSnapshot.val());
+     myArray.push(childData);
+     
+     
+    });
+     console.log(myArray);
+     var len = myArray.length;
+for(var i=0;i<len; i++){
+    $("#select").append("<option value='Value'>"+myArray[i]+"</option>");
+   }
+  
+});
+   }
 </script>
   </body>
 </html>

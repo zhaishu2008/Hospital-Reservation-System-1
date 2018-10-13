@@ -90,31 +90,7 @@
        <img src="../images/add.png" width="8%" height="30px">
                          </a></div>
              <div id="add">
-             <div class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Shan Wilson</p><input type="button" id="DeDoctor" value="Delect"></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="1">SADshagd ashjh LS  fhieu dsf sdadasdada
-              sadasdada</span></div>
-
-                 </div></div></div></div>
-             <br>
-             <div  class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="as.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Petter pianapple</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctiona()">Show Doctor Information<span class="popuptext" id="2">asas Li Bei Lei 大坏蛋大笨猪 猪猪猪猪 猪猪猪 猪猪猪</span></div>
-
-                 </div></div></div></div>
-             <br>
-             <div class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="ss.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Ko Lisdwa</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions(3)">Show Doctor Information<span class="popuptext" id="3">adadada as ada   ada dad   dffffaa a asdadadadada
-              sadasdada</span></div>
-
-                 </div></div></div></div>
+            
              </div>
          </div>
 
@@ -123,8 +99,27 @@
     </div>
   </h1>
   <script>
+      var departID;
+      var doctorID;
+      function DeDoctor(dcName){
+         console.log("delete");
+         var departre = firebase.database().ref("Departments").orderByChild("Doctor").equalTo(
+               dcName);
+      departre.on("child_added", snap => { 
+          departID = snap.key;
+          console.log(departID);
+      });
       
-      function DeDoctor(){
+      var doctorre = firebase.database().ref("Doctors").orderByChild("WholeName").equalTo(
+               dcName);
+      doctorre.on("child_added", snap => { 
+          doctorID = snap.key;
+          console.log(doctorID);
+      });
+     /* firebase.database().ref('/Departments/'+departID).remove();*/
+      firebase.database().ref('/Doctors/'+doctorID).remove();
+      window.alert("Delete Successfully");
+     location.reload();
           
       }
       
@@ -141,6 +136,9 @@
 var ln=new Array();
 var fn=new Array();
 var dp=new Array();
+var dep=new Array();
+var dn=new Array();
+
 var leadsRef = firebase.database().ref('/Doctors');
 
 
@@ -149,18 +147,20 @@ leadsRef.on('value', function(snapshot) {
       var lastname = childSnapshot.val().Lastname;
       var firstname = childSnapshot.val().Firstname;
       var description = childSnapshot.val().Description;
-      
+      var department = childSnapshot.val().Department;
+       var doctname = childSnapshot.val().WholeName;
      ln.push(lastname);
      fn.push(firstname);
      dp.push(description);
-     
+     dep.push(department);
+     dn.push(doctname);
      
     });
 console.log(ln);
      var len = ln.length;
 for(var i=0;i<len; i++){
-   addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
-           +fn[i]+ln[i]+'</p><input type="button" onclick="DeDoctor" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show Doctor Information<span class="popuptext" id="'+i+'">'
+   addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><p>'+dep[i]+'</p><p onclick="selectDoctor()">'
+           +fn[i]+' '+ln[i]+'</p><input type="button" onclick="DeDoctor('+"'"+dn[i]+"'"+')" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show Doctor Information<span class="popuptext" id="'+i+'">'
    +dp[i]+'</span></div></div></div></div></div><br>';
    }
    $("#add").html(addDepart);

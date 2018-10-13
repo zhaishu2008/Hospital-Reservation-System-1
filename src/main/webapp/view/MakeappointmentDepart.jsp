@@ -98,10 +98,7 @@
         <div class="boxleft">Booking Now
             <div class="text"><br><br>
           <br>
-                     <div class="h3" ><a id="doctor" onclick="selectDoctor()" href="MakeappointmentDoctor.jsp">Select Doctor</a></div>
-
-          <br>
-          <div class="h3"><a href="MakeappointmentTime.jsp">Select Time</a></div>
+          <div class="h3" >Please Select Department</div>
           <form><input type="text" name="selecteddepartment" id="selectedDepart"value="" style="visibility:hidden"></form>
         </div></div>
         <div id="addDepart" class="boxright">
@@ -142,7 +139,7 @@ window.onload = load();
 function load(){
     firebase.auth().onAuthStateChanged(function(user){
     if(user) {
-        var url=location.href; 
+        var url=decodeURI(location.href); 
 
  console.log(url);
   var previous = document.referrer;

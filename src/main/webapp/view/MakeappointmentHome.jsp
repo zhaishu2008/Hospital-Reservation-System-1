@@ -91,18 +91,16 @@
 
     </div>
     <div class="right" >Booking Now
-        <div class="text"><br><br><div class="h3"><a id="depart" onclick="selectDepart()" href="MakeappointmentDepart.jsp">Select Department</a></div>
+        <div class="text"><br><br><div class="h3"><a id="depart" onclick="makeAppointment()" href="MakeappointmentDepart.jsp">Make an appointment</a></div>
           <br>
-          <div class="h3" ><a id="doctor" onclick="selectDoctor()" href="MakeappointmentDoctor.jsp">Select Doctor</a></div>
-          <br>
-            <div class="h3"><a href="MakeappointmentTime.jsp">Select Time</a></div>
+         
           </div>
     </div>
 
    </div>
  </h1>
 <script>
-   function selectDepart(){
+   function makeAppointment(){
  var department = $("#depart").text();
  var Doctor = $("#doctor").text();
  
@@ -113,17 +111,7 @@ var url="MakeappointDepart.jsp"+"?"+department+"&"+Doctor;
     window.location.assign(encodeURI(url)); 
 }
     
-    function selectDoctor(){
- var department = $("#depart").text();
- var Doctor = $("#doctor").text();
- 
- 
-
-
-var url="MakeappointDoctor.jsp"+"?"+department+"&"+Doctor;
-    window.location.assign(encodeURI(url)); 
-}
-
+    
 window.onload = load();
 function load(){
    

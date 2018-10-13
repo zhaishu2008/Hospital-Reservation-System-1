@@ -85,33 +85,7 @@
            <br>
            <div class="h3"><a href="MagageUser.jsp">User</a></div>
          </div></div>
-         <div class="boxright"><div class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Better Jeson</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="myPopup">Dtsaswdad ashjh LS  fhieu dsf sdadasdada
-              sadasdada</span></div>
-
-                 </div></div></div></div>
-             <br>
-             <div  class="sbox1"><div class="txt1">
-             <div class="card"><div class="column3"><img src="as.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Wollio Chen</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctiona()">Show Doctor Information<span class="popuptext" id="myPopups">asas Li Bei Lei 大坏蛋大笨猪 猪猪猪猪 猪猪猪 猪猪猪</span></div>
-
-                 </div></div></div></div>
-             <br>
-             <div class="sbox2"><div class="txt1">
-             <div class="card"><div class="column3"><img src="ss.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p>Weason Aliex</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">Dasz sdw Wsacasadad  ada dad   dffffaa a asdadadadada
-              sadasdada</span></div>
-
-                 </div></div></div></div>
-
-         </div>
+        
 
      </div>
 

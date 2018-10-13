@@ -130,7 +130,7 @@ leadsRef.on('value', function(snapshot) {
      var len = dn.length;
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<button class="accordion" id="accordion" style="width: 550px;">Appointment '+(i+1)+'</button><div class="panel" style="text-align: left;"><p>Appointment<br>Date:  '
-   +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
+   +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" onclick="delete()" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
    }
    $("#add").html(addDepart);
    console.log("run");
@@ -153,6 +153,30 @@ for(var i=0;i<len; i++){
  });
  
     }
+    
+    var departID;
+      var doctorID;
+      function DeDoctor(dcName){
+         console.log("delete");
+         var departre = firebase.database().ref("Departments").orderByChild("Doctor").equalTo(
+               dcName);
+      departre.on("child_added", snap => { 
+          departID = snap.key;
+          console.log(departID);
+      });
+      
+      var doctorre = firebase.database().ref("Doctors").orderByChild("WholeName").equalTo(
+               dcName);
+      doctorre.on("child_added", snap => { 
+          doctorID = snap.key;
+          console.log(doctorID);
+      });
+     /* firebase.database().ref('/Departments/'+departID).remove();*/
+      firebase.database().ref('/Doctors/'+doctorID).remove();
+      window.alert("Delete Successfully");
+     location.reload();
+          
+      }
 
 
     

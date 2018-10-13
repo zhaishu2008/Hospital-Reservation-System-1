@@ -100,9 +100,9 @@
     </div>
     <div class="right" >
         <div class="boxleft">Booking Now
-            <div class="text"><br><br><div class="h3"><a id="depart" href="MakeappointmentDepart.jsp">Select Department</a></div>
+            <div class="text"><br><br><div class="h3"><a id="depart" href="javascript:history.go(-2);">Back to Select Department</a></div>
           <br>
-          <div class="h3"><a id="doctor" href="MakeappointmentDoctor.jsp">Select Doctor</a></div>
+          <div class="h3"><a id="doctor" href="javascript:history.go(-1);">Back to Select Doctor</a></div>
           <br>
           
         </div></div>
@@ -191,12 +191,22 @@ $("#comfirm").click(function(){
     console.error("error：",err);
   });
   
- 
+  var doctorId;
+  var doctorName =  $("#doctor").val;
   
-   var doctorappointmentRef = firebase.database().ref('/Doctor/'+doctor.uid);
+ var hey = firebase.database().ref("/Doctors").orderByChild("WholeName").equalTo(
+               doctorName);
+      hey.on("child_added", snap => { 
+          doctorId = snap.key;
+          console.log(doctorId);
+        
+      });
+    
+  
+   var doctorappointmentRef = firebase.database().ref('/Doctors/'+doctorId+'/Appointments');
     doctorappointmentRef.push().set({
-     uid: user.uid,
-     Patient: patientname,
+    uid: user.uid,
+    Patient: patientname,
     Time: $("#Time").val(),
     Date: $("#Date").val(),
     Comments: $("#comments").val()
@@ -218,7 +228,7 @@ function load(){
    
     firebase.auth().onAuthStateChanged(function(user){
     if(user) {
-        var url=location.href; 
+        var url=decodeURI(location.href); 
 
  console.log(url);
   var previous = document.referrer;

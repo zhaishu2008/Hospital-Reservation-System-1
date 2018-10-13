@@ -101,10 +101,35 @@
 
 
 <script>
-    function Dedepart(){}
+    var departID;
+    var doctorID;
+    function Dedepart(dddepart){
+        console.log("delete");
+        console.log(dddepart);
+        var departre = firebase.database().ref("Departments").orderByChild("Name").equalTo(
+               dddepart);
+      departre.on("child_added", snap => { 
+          departID = snap.key;
+          console.log(departID);
+      });
+      
+      var doctorre = firebase.database().ref("Doctors").orderByChild("Department").equalTo(
+               dddepart);
+      doctorre.on("child_added", snap => { 
+          doctorID = snap.key;
+          console.log(doctorID);
+      });
+      firebase.database().ref('/Departments/'+departID).remove();
+      if(doctorID!=null){ firebase.database().ref('/Doctors/'+doctorID).remove();}
+      window.alert("Delete Successfully");
+     location.reload();
+  }
     
     window.onload=onload();
     function onload(){
+        
+    
+
     var addDepart = "";
 var myArray=new Array();
 var leadsRef = firebase.database().ref('/Departments');
@@ -121,10 +146,11 @@ leadsRef.on('value', function(snapshot) {
      console.log(myArray);
      var len = myArray.length;
 for(var i=0;i<len; i++){
-   addDepart = addDepart + '<div class="h6" onclick="selectDepart()">'+ myArray[i]+'</div><input type="button" onclick="Dedepart" value="Delect"><br>';
+   addDepart = addDepart + '<div class="h6" onclick="selectDepart()">'+myArray[i]+'</div><input type="button" onclick="Dedepart('+"'"+myArray[i]+"'"+')" value="Delect"><br>';
    }
    $("#addDepart").html(addDepart);
-});}
+});
+}
  
 </script>
     </body>
