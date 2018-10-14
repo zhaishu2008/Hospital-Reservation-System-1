@@ -144,6 +144,42 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
                       var gender = $("input:radio[name='gender']:checked").val();
                       var dob = $("#DOB").val();
                       var isstaff = 0;
+                      
+                      if(firstname===""){
+           alert("The First Name cannot be empty");
+           firstname.focus();
+           return false;
+           
+       }else
+           
+       if(lastname===""){
+           alert("The Last Name cannot be empty");
+           lastname.focus();
+           return false;
+           
+       }else
+       
+       if(num===""){
+           alert("The Number cannot be empty");
+          num.focus();
+           return false;
+           
+       }else
+           
+       if(useremail)===""){
+           alert("The Email cannot be empty");
+          useremail.focus();
+           return false;
+           
+       }else
+       
+       if(userpassword===""){
+           alert("The Password cannot be empty");
+          userpassword.focus();
+           return false;
+           
+       }
+   
     firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
  
   var errorCode = error.code;
