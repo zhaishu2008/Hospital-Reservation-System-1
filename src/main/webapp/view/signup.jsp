@@ -42,11 +42,11 @@
   var database = firebase.database();
 </script>
   
-</script>
 
 
+</head>
 
-
+ <body background="../images/login.jpeg">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -61,11 +61,11 @@
 
     <script src="../lib/picker.time.js"></script>
 
-    </head>
+    
     <jsp:useBean id="staffsignup" scope="page" class="HospitalReservationSystem.Doctor">
          <jsp:setProperty name="staffsignup" property="staffcode"/>
     </jsp:useBean>
-    <body background="../images/login.jpeg">
+   
 
  <a href="../index.jsp">
        <img src="../images/logo.png" width="10%" height="px">
@@ -110,14 +110,8 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
     <input id="DOB" type="date" class="form-control" value="1900/01/01">
     
   </div>
-                <br/>
-                <div class="form-group">
-                    
-    <label for="Isstaff">Staff code</label>
-   
-    <input id="staffcode" name="staffsignup" property="staffcode" class="form-control" placeholder="00000">
-                    
-  </div>
+           
+               
                
                
                 <br/>
@@ -166,7 +160,7 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
            
        }else
            
-       if(useremail)===""){
+       if(useremail===""){
            alert("The Email cannot be empty");
           useremail.focus();
            return false;
@@ -179,16 +173,18 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
            return false;
            
        }
-   
+   var errorMessage =" ";
     firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
  
   var errorCode = error.code;
-  var errorMessage = error.message;
+  errorMessage = error.message;
   window.alert("Error: " + errorMessage);
+  
     });
-   
+   if (errorMessage==" "){
   firebase.auth().onAuthStateChanged(function(user){
     if(user) {
+        console.log(user.uid);
         firebase.database().ref('Users/'+user.uid).set({
     Email: useremail,
     Password: userpassword,
@@ -207,6 +203,7 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
  }
   
 });
+}
 }
 
 

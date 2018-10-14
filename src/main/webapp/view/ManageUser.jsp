@@ -152,7 +152,7 @@ console.log(ln);
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
            +fn[i]+' '+ln[i]+'</p><input type="button" onclick="DeUser('+em[i]+')" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show Doctor Information<span class="popuptext" id="'+i+'">'
-   +dob[i]+'</span></div></div></div></div></div><br>';
+   +db[i]+'</span></div></div></div></div></div><br>';
    }
    $("#add").html(addDepart);
 }); 

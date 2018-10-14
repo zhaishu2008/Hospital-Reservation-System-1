@@ -187,19 +187,22 @@
           console.log(departID);
         
       });
-       
+       var errorMessage = " ";
        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
                       
-                      firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+     firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
  
   var errorCode = error.code;
-  var errorMessage = error.message;
+ errorMessage = error.message;
+ 
   window.alert("Error: " + errorMessage);
-  if (errorMessage==null){
+   });
+  if (errorMessage===" "){
        firebase.auth().onAuthStateChanged(function(user){
     if(user) {
-        firebase.database().ref('Departments/'+departID+'/Doctors').push().set({
+        console.log(user.uid);
+        firebase.database().ref('Departments/'+departID+'/Doctors/').push().set({
     DoctorName: wholeName
     
   }).then(function(){
@@ -209,7 +212,7 @@
   });
         
         console.log(wholeName);
-        firebase.database().ref('Doctors/'+user.uid).set({
+        firebase.database().ref('Doctors/').push().set({
     Email: useremail,
      Password: userpassword,
     Lastname: $("#lname").val(),
@@ -230,7 +233,7 @@
   }}); 
       
   }
-    });
+   
     
   
   

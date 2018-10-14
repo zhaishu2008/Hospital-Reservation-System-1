@@ -11,11 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Hospital Reservation System</title>
-        <link rel="stylesheet" type="text/css" href="web.css"> 
-         <meta charset="UTF-8">
+      <link rel="stylesheet" type="text/css" href="web.css"> 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+       
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-       
+
 <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
 <!-- Firebase App is always required and must be first -->
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
@@ -38,7 +40,11 @@
     messagingSenderId: "1538681596"
   };
   firebase.initializeApp(config);
+  var database = firebase.database();
 </script>
+  
+
+
 
 
 
@@ -49,6 +55,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 
         
        <script>  
@@ -93,7 +101,7 @@
                  </div>
                  <div class="column"></div><div class="column3">
                  <div class="h3">Gender</div>
-                 <label class="radio-inline">
+                 <label>
   <input type="radio" name="gender" id="sex1" value="male" checked="checked"> Male
 
 
@@ -104,7 +112,7 @@
                 
                
             </div>
-             <button class="SaveBt" onclick="addUser()">Add</button>
+             <input class="SaveBt" type="button" value="Add" onclick="addUser()">
          </div>
         </div>
       </h1>
@@ -117,66 +125,74 @@
        
        if($("#fname").val()===""){
            alert("The First Name cannot be empty");
-           $("#fname").val().focus();
+          
            return false;
            
        }else
            
        if($("#lname").val()===""){
            alert("The Last Name cannot be empty");
-           $("#lname").val().focus();
+          
            return false;
            
        }else
        
        if($("#number").val()===""){
            alert("The Number cannot be empty");
-           $("#number").val().focus();
+         
            return false;
            
        }else
            
        if($("#loginEmail").val()===""){
            alert("The Email cannot be empty");
-           $("#loginEmail").val().focus();
+          
            return false;
            
        }else
        
        if($("#loginPassword").val()===""){
            alert("The Password cannot be empty");
-           $("#loginPassword").val().focus();
+          
            return false;
            
        }
-       
+      
        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
-                      firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+                      
+   var errorMessage =" ";
+     firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
  
   var errorCode = error.code;
-  var errorMessage = error.message;
+  errorMessage = error.message;
   window.alert("Error: " + errorMessage);
+  
+  
     });
-        
-        firebase.auth().onAuthStateChanged(function(user){
+   if (errorMessage==" "){
+  firebase.auth().onAuthStateChanged(function(user){
+      console.log(user.uid);
     if(user) {
+        console.log(user.uid);
         firebase.database().ref('Users/'+user.uid).set({
     Email: useremail,
-        Password: userpassword,
+    Password: userpassword,
     Lastname: $("#lname").val(),
     Firstname: $("#fname").val(),
     PhoneNum: $("#number").val(),
     Gender: $("input:radio[name='gender']:checked").val(),
-    isstaff: "0",
-     DOB: $("#dob").val()
+    DOB: $("#dob").val(),
+    IsStaff: "0"
   });   
-    
-    window.alert("Add User successfully");
-        window.location.href="ManageUser.jsp";
-   
-  }}); 
+     window.alert("Sign up successfully");
+  window.location.href='ManageUser.jsp';
 
+ }
+  
+});
+   }
+   
    }
    
 </script>

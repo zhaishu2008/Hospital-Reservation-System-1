@@ -49,6 +49,7 @@
 <script> firebase.auth().onAuthStateChanged(function(user){
     if(user) {
        var uid = user.uid;
+       console.log(uid);
         
         $("#lgbtn").html("My account");
         $("#lgbtn").click(function(){
