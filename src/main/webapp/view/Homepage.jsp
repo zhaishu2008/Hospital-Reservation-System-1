@@ -91,12 +91,8 @@
          <div class="h2"><button id="logout" class="LogOutBt">Log out</button></div>
 
          </div>
-         <div class="rightbox" >Search
-           <div class="text">Search
-               <br>
-               <input type="text" width="50" height="20" style="height: 30px;">
-             <br>
-             <input type="button" value="Search"></div>
+         <div class="right" ><br><br>Welcome !
+             
          </div>
 
         </div>
