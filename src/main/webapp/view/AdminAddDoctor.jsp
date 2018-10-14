@@ -87,7 +87,7 @@
              <div class="text"><div class="column"></div><div class="column"><div class="h3">First Name</div><input type="text" id="fname" placeholder="Your First name" style="height: 30px;">
                  <div class="h3">Phone</div><input id="number" type="text" placeholder="000-000-0000" style="height: 30px;">
                  <div class="h3">Email</div><input id="loginEmail" type="text" placeholder="email" style="height: 30px;"></div>
-                 <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" id="lastname" placeholder="Your Last name" style="height: 30px;">
+                 <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" placeholder="Your Last name" style="height: 30px;">
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
                  <div class="h3">Password</div><input id="loginPassword" type="text" placeholder="password" style="height: 30px;">
             </div>
@@ -122,6 +122,59 @@
     
 
    function addDoctor(){
+       
+       if($("#fname").val()===""){
+           alert("The First Name cannot be empty");
+           
+           return false;
+           
+       }else
+           
+       if($("#lname").val()===""){
+           alert("The Last Name cannot be empty");
+           
+           return false;
+           
+       }else
+       
+       if($("#number").val()===""){
+           alert("The Number cannot be empty");
+           
+           return false;
+           
+       }else
+       
+       if($("#loginEmail").val()===""){
+           alert("The Email cannot be empty");
+           
+           return false;
+           
+       }else
+       
+       
+       
+       if($("#loginPassword").val()===""){
+           alert("The Password cannot be empty");
+           
+           return false;
+           
+       }else
+       
+       if($("#description").val()===""){
+           alert("The Description cannot be empty");
+           
+           return false;
+           
+       }else
+   
+       if($("#select").find("option:selected").text()===""){
+           alert("The Department cannot be empty");
+           
+           return false;
+           
+       }
+
+       
        var departID;
        var wholeName = $("#fname").val()+" "+$("#lname").val();
        var depart = $("#select").find("option:selected").text();
@@ -143,7 +196,13 @@
   var errorCode = error.code;
   var errorMessage = error.message;
   window.alert("Error: " + errorMessage);
+  return false;
     });
+    
+  
+  
+        firebase.auth().onAuthStateChanged(function(user){
+    if(user) {
         firebase.database().ref('Departments/'+departID+'/Doctors').push().set({
     DoctorName: wholeName
     
@@ -152,9 +211,6 @@
   }).catch(function(err){
     console.error("error：",err);
   });
-  
-        firebase.auth().onAuthStateChanged(function(user){
-    if(user) {
         
         console.log(wholeName);
         firebase.database().ref('Doctors/'+user.uid).set({

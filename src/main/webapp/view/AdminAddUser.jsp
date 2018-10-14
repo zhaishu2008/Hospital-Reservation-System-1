@@ -87,7 +87,7 @@
                  <div class="h3">Phone</div><input id="number" type="text" placeholder="000-000-0000" style="height: 30px;">
                   <div class="h3">Email</div><input id="loginEmail" type="text" placeholder="email" style="height: 30px;">
                  </div>
-                 <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" id="lastname" placeholder="Your Last name" style="height: 30px;">
+                 <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" placeholder="Your Last name" style="height: 30px;">
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
                   <div class="h3">Password</div><input id="loginPassword" type="text" placeholder="password" style="height: 30px;">
                  </div>
@@ -113,6 +113,42 @@
 
 
    function addUser(){
+       
+       if($("#fname").val()===""){
+           alert("The First Name cannot be empty");
+           $("#fname").val().focus();
+           return false;
+           
+       }else
+           
+       if($("#lname").val()===""){
+           alert("The Last Name cannot be empty");
+           $("#lname").val().focus();
+           return false;
+           
+       }else
+       
+       if($("#number").val()===""){
+           alert("The Number cannot be empty");
+           $("#number").val().focus();
+           return false;
+           
+       }else
+           
+       if($("#loginEmail").val()===""){
+           alert("The Email cannot be empty");
+           $("#loginEmail").val().focus();
+           return false;
+           
+       }else
+       
+       if($("#loginPassword").val()===""){
+           alert("The Password cannot be empty");
+           $("#loginPassword").val().focus();
+           return false;
+           
+       }
+       
        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
                       firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {

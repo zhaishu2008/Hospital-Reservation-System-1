@@ -107,6 +107,13 @@
     
 
    function addDepartment(){
+       
+       if($("#depart").val()===""){
+           alert("The Department cannot be empty");
+           $("#depart").val().focus();
+           return false;
+           
+       }
   
         var department = $("#depart").val();
         console.log(department);
