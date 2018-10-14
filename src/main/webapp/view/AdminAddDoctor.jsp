@@ -106,8 +106,8 @@
                  <br><br><br>
                 
                
-            </div>
-             <button class="SaveBt" onclick="addDoctor()">Add</button>
+            </div><div class="column"></div><div class="column">
+             <button class="SaveBt" onclick="addDoctor()">Add</button></div>
          </div>
         </div>
       </h1>

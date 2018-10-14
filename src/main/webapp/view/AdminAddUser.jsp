@@ -91,13 +91,14 @@
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
                   <div class="h3">Password</div><input id="loginPassword" type="text" placeholder="password" style="height: 30px;">
                  </div>
+                 <div class="column"></div><div class="column3">
                  <div class="h3">Gender</div>
                  <label class="radio-inline">
   <input type="radio" name="gender" id="sex1" value="male" checked="checked"> Male
 
 
   <input type="radio" name="gender" id="sex2" value="female"> Female
-</label>
+                     </label></div>
                  <br>
                  <br><br><br>
                 

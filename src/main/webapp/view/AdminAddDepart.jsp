@@ -89,12 +89,12 @@
                 
                  </div>
                  <br>
+             <button class="SaveBt" onclick="addDepartment()">Add</button>
                  
                
             </div>
-             <button class="SaveBt" onclick="addDepartment()">Add</button>
+             
          </div>
-        </div>
       </h1>
        
 <script type="text/javascript">
