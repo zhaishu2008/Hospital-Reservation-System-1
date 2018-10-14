@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
 
-<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 <!-- Firebase App is always required and must be first -->
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
 
@@ -122,11 +122,6 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
                 </form>
 </div>
 
-<script>
-  
-
-
-  </script>
   
 <script>
     function signup(){
@@ -141,35 +136,34 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
                       
                       if(firstname===""){
            alert("The First Name cannot be empty");
-           firstname.val().focus();
+          
            return false;
            
        }else
            
        if(lastname===""){
            alert("The Last Name cannot be empty");
-           lastname.val().focus();
-           return false;
+          
+    
            
        }else
        
        if(num===""){
            alert("The Number cannot be empty");
-          num.val().focus();
+     
            return false;
            
-       }else
+       }else    
            
        if(useremail===""){
            alert("The Email cannot be empty");
-          useremail.val().focus();
+     
            return false;
            
        }else
        
        if(userpassword===""){
            alert("The Password cannot be empty");
-          userpassword.val().focus();
            return false;
            
        }
@@ -193,6 +187,7 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
     PhoneNum: num,
     Gender: gender,
     DOB: dob,
+    Uid: user.uid,
     IsStaff: isstaff 
     
     

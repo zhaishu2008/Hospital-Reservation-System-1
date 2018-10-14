@@ -15,7 +15,7 @@
          <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 <!-- Firebase App is always required and must be first -->
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
 
@@ -101,24 +101,43 @@
     </div>
   </h1>
   <script>
-      var uid;
-      function DeDoctor(emm){
-        
-         var departre = firebase.database().ref("Users").orderByChild("Email").equalTo(
-               emm);
-      departre.on("child_added", snap => { 
-          uid = snap.key;
-          console.log(uid);
-      });
       
-     
-      firebase.database().ref('/Users/'+uid).remove();
+      function DeUser(emm){
+          var useremail;
+          var userpassword;
+          firebase.database().ref('/Users/' + emm).once('value').then(function(snapshot) {
+   useremail = snapshot.val().Email;
+    userpassword = snapshot.val().Password;
+    console.log(useremail);
+    firebase.auth().signInWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+  
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  
+  window.alert("Error: " + errorMessage);
+ 
+
+}); 
+          });
+        
+        
+firebase.auth().onAuthStateChanged(function(user){
+    
+        if(user) {
+            user.delete().then(function() {
+  // User deleted.
+}).catch(function(error) {
+  // An error happened.
+});
+        }});
+        console.log(emm);
+      firebase.database().ref('/Users/'+emm).remove();
       window.alert("Delete Successfully");
      location.reload();
           
       }
       
-function myFunction(x){
+  function myFunction(x){
                  var popup = document.getElementById(x);
                  popup.classList.toggle("show");
              }
@@ -140,18 +159,18 @@ leadsRef.on('value', function(snapshot) {
       var lastname = childSnapshot.val().Lastname;
       var firstname = childSnapshot.val().Firstname;
       var dob = childSnapshot.val().DOB;
-       var email = childSnapshot.val().Email;
+       var uid = childSnapshot.val().Uid;
      ln.push(lastname);
      fn.push(firstname);
      db.push(dob);
-     em.push(email);
+     em.push(uid);
      
     });
-console.log(ln);
+console.log(em);
      var len = ln.length;
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><br><p onclick="selectDoctor()">'
-           +fn[i]+' '+ln[i]+'</p><input type="button" onclick="DeUser('+em[i]+')" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show User Information<span class="popuptext" id="'+i+'">'
+           +fn[i]+' '+ln[i]+'</p><input type="button" onclick="DeUser('+"'"+em[i]+"'"+')" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show User Information<span class="popuptext" id="'+i+'">'
    +db[i]+'</span></div></div></div></div></div><br>';
    }
    $("#add").html(addDepart);

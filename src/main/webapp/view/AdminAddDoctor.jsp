@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
        
-<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 <!-- Firebase App is always required and must be first -->
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
 
@@ -83,10 +83,10 @@
          </div>
          
          <div class="right" >Add Doctor
-            
+           
              <div class="text"><div class="column"></div><div class="column"><div class="h3">First Name</div><input type="text" id="fname" placeholder="Your First name" style="height: 30px;">
                  <div class="h3">Phone</div><input id="number" type="text" placeholder="000-000-0000" style="height: 30px;">
-                 <div class="h3">Email</div><input id="loginEmail" type="text" placeholder="email" style="height: 30px;"></div>
+                 <div class="h3">Email</div><input id="loginEmail" type="email" placeholder="email" style="height: 30px;"></div>
                  <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" placeholder="Your Last name" style="height: 30px;">
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
                  <div class="h3">Password</div><input id="loginPassword" type="text" placeholder="password" style="height: 30px;">
@@ -107,7 +107,7 @@
                 
                
             </div><div class="column"></div><div class="column">
-             <button class="SaveBt" onclick="addDoctor()">Add</button></div>
+                <button class="SaveBt" onclick="addDoctor()">Add</button></div>
          </div>
         </div>
       </h1>
@@ -122,29 +122,38 @@
     
 
    function addDoctor(){
-       
-       if($("#fname").val()===""){
+       var useremail = $("#loginEmail").val();
+                      var userpassword = $("#loginPassword").val();
+                      var lastname = $("#lname").val();
+                      var firstname = $("#fname").val();
+                      var num = $("#number").val();
+                      var gender = $("input:radio[name='gender']:checked").val();
+                      var dob = $("#dob").val();
+                      var descrip = $("#description").val();
+                      var iss = 1;
+                      var depart = $("#select").find("option:selected").text();
+       if(firstname===""){
            alert("The First Name cannot be empty");
            
            return false;
            
        }else
            
-       if($("#lname").val()===""){
+       if(lastname===""){
            alert("The Last Name cannot be empty");
            
            return false;
            
        }else
        
-       if($("#number").val()===""){
+       if(num===""){
            alert("The Number cannot be empty");
            
            return false;
            
        }else
        
-       if($("#loginEmail").val()===""){
+       if(useremail===""){
            alert("The Email cannot be empty");
            
            return false;
@@ -153,23 +162,30 @@
        
        
        
-       if($("#loginPassword").val()===""){
+       if(userpassword===""){
            alert("The Password cannot be empty");
            
            return false;
            
        }else
        
-       if($("#description").val()===""){
+       if(descrip===""){
            alert("The Description cannot be empty");
            
            return false;
            
        }else
    
-       if($("#select").find("option:selected").text()===""){
+       if(depart===""){
            alert("The Department cannot be empty");
            
+           return false;
+           
+       }else
+       
+       if(userpassword.length < 6){
+           alert("The Password must be no fewer than six characters in length");
+          
            return false;
            
        }
@@ -177,7 +193,6 @@
        
        var departID;
        var wholeName = $("#fname").val()+" "+$("#lname").val();
-       var depart = $("#select").find("option:selected").text();
        console.log(depart);
        
        var hey = firebase.database().ref('/Departments').orderByChild('Name').equalTo(
@@ -188,16 +203,8 @@
         
       });
        
-       var useremail = $("#loginEmail").val();
-                      var userpassword = $("#loginPassword").val();
-                      var lastname = $("#lname").val();
-                      var firstname = $("#fname").val();
-                      var num = $("#number").val();
-                      var gender = $("input:radio[name='gender']:checked").val();
-                      var dob = $("#dob").val();
-                      var descrip = $("#description").val();
-                      var iss = 1;
-    var errorMessage = 0;
+      
+    var errorMessage =" ";
     firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
  
   var errorCode = error.code;
@@ -206,7 +213,7 @@
   
     });
     
-  if (errorMessage==0){
+  if (errorMessage==" "){
        console.log("do");
        firebase.auth().onAuthStateChanged(function(user){
     if(user) {

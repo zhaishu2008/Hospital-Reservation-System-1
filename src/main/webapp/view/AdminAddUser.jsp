@@ -18,7 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
 
-<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 <!-- Firebase App is always required and must be first -->
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
 
@@ -93,7 +93,7 @@
             
              <div class="text"><div class="column"></div><div class="column"><div class="h3">First Name</div><input type="text" id="fname" placeholder="Your First name" style="height: 30px;">
                  <div class="h3">Phone</div><input id="number" type="text" placeholder="000-000-0000" style="height: 30px;">
-                  <div class="h3">Email</div><input id="loginEmail" type="text" placeholder="email" style="height: 30px;">
+                  <div class="h3">Email</div><input id="loginEmail" type="email" placeholder="email" style="height: 30px;">
                  </div>
                  <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" placeholder="Your Last name" style="height: 30px;">
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
@@ -111,76 +111,79 @@
                  <br><br><br>
                 
                
-            </div>
+             </div>
              <input class="SaveBt" type="button" value="Add" onclick="addUser()">
          </div>
         </div>
       </h1>
        
 <script>
-     
-
-
+                    
    function addUser(){
-       
-       if($("#fname").val()===""){
-           alert("The First Name cannot be empty");
-          
-           return false;
-           
-       }else
-           
-       if($("#lname").val()===""){
-           alert("The Last Name cannot be empty");
-          
-           return false;
-           
-       }else
-       
-       if($("#number").val()===""){
-           alert("The Number cannot be empty");
-         
-           return false;
-           
-       }else
-           
-       if($("#loginEmail").val()===""){
-           alert("The Email cannot be empty");
-          
-           return false;
-           
-       }else
-       
-       if($("#loginPassword").val()===""){
-           alert("The Password cannot be empty");
-          
-           return false;
-           
-       }
-      
-       var useremail = $("#loginEmail").val();
+        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
-                       var userpassword = $("#loginPassword").val();
                       var lastname = $("#lname").val();
                       var firstname = $("#fname").val();
                       var num = $("#number").val();
                       var gender = $("input:radio[name='gender']:checked").val();
                       var dob = $("#dob").val();
                        var isstaff = 0;
-                       
-   var errorMessage = 0;
-   firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
-  // Handle Errors here.
+
+      
+       
+       if(firstname===""){
+           alert("The First Name cannot be empty");
+          
+           return false;
+           
+       }else
+           
+       if(lastname===""){
+           alert("The Last Name cannot be empty");
+          
+           return false;
+           
+       }else
+       
+       if(num===""){
+           alert("The Number cannot be empty");
+         
+           return false;
+           
+       }else
+           
+       if(useremail===""){
+           alert("The Email cannot be empty");
+          
+           return false;
+           
+       }else
+       
+       if(userpassword===""){
+           alert("The Password cannot be empty");
+          
+           return false;
+           
+       }else
+       
+       if(userpassword.length < 6){
+           alert("The Password must be no fewer than six characters in length");
+          
+           return false;
+           
+       }
+           
+           
+      var errorMessage =" ";
+    firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+ 
   var errorCode = error.code;
   errorMessage = error.message;
   window.alert("Error: " + errorMessage);
-  console.log(errorMessage);
-  // ...
-});
-     
-   if (errorMessage==1){
+  
+    });
+   if (errorMessage==" "){
   firebase.auth().onAuthStateChanged(function(user){
-      console.log(user.uid);
     if(user) {
         console.log(user.uid);
         firebase.database().ref('Users/'+user.uid).set({
@@ -191,17 +194,23 @@
     PhoneNum: num,
     Gender: gender,
     DOB: dob,
-    IsStaff: isstaff
-  });   
-     window.alert("Add User successfully");
+    Uid: user.uid,
+    IsStaff: isstaff      
+       });   
+     window.alert("Sign up successfully");
   window.location.href='ManageUser.jsp';
 
  }
   
 });
-   }
+           
+   }}
    
-   }
+   function isEmail( str ){  
+    var myReg = /^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/; 
+    if(myReg.test(str)) return true; 
+    return false; 
+}
    
 </script>
   </body>

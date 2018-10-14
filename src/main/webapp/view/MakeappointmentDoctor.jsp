@@ -17,7 +17,7 @@
          <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 <!-- Firebase App is always required and must be first -->
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
 
@@ -104,32 +104,8 @@
                      <form><input type="text" name="selecteddoctor" id="selectedDoctor"value="dd" style="visibility:hidden"></form>
 
          </div></div>
-         <div class="boxright" id="add"><div class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-            <div class="h4" ><br><p onclick="selectDoctor()">Shan Wilson</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction()">Show Doctor Information<span class="popuptext" id="myPopup">SADshagd ashjh LS  fhieu dsf sdadasdada
-              Excellent</span></div>
-
-                 </div></div></div></div>
-             <br>
-             <div  class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="as.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p onclick="selectDoctor()">Petter pianapple</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctiona()">Show Doctor Information<span class="popuptext" id="myPopups">asas Li Bei Lei 大坏蛋大笨猪 猪猪猪猪 猪猪猪 猪猪猪</span></div>
-
-                 </div></div></div></div>
-             <br>
-             <div class="sbox"><div class="txt1">
-             <div class="card"><div class="column3"><img src="ss.jpeg" alt="qp" style="width:100%"></div><div class="container" >
-             <div class="column4">
-                 <div class="h4" ><br><p onclick="selectDoctor()">Ko Lisdwa</p></div></div>
-                 </div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunctions()">Show Doctor Information<span class="popuptext" id="myPopupx">
-                                 adadada as ada   ada dad   dffffaa a asdadadadada
-              sadasdada</span></div>
-
-                 </div></div></div></div>
+         <div class="boxright" id="add">
+       
 
          </div>
 

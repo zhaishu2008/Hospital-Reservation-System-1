@@ -90,7 +90,7 @@
        <img src="../images/add.png" width="8%" height="30px">
                          </a></div>
              <div id="add">
-            
+              No Doctors
              </div>
          </div>
 
@@ -101,6 +101,8 @@
   <script>
       var departID;
       var doctorID;
+      var doctorusername;
+      var doctorpassword;
       function DeDoctor(dcName,dtName){
         
          var departre = firebase.database().ref("Departments").orderByChild("Name").equalTo(
@@ -114,9 +116,33 @@
                dcName);
       doctorre.on("child_added", snap => { 
           doctorID = snap.key;
-          console.log(doctorID);
+          doctorusername = snap.child("Email").val();
+           doctorpassword = snap.child("Password").val();
+
+          console.log(doctorusername);
       });
      /* firebase.database().ref('/Departments/'+departID).remove();*/
+     firebase.auth().signInWithEmailAndPassword(doctorusername, doctorpassword).catch(function(error) {
+  
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  
+  window.alert("Error: " + errorMessage);
+ 
+
+}); 
+firebase.auth().onAuthStateChanged(function(user){
+    
+        if(user) {
+            user.delete().then(function() {
+  // User deleted.
+}).catch(function(error) {
+  // An error happened.
+});
+
+            
+        }
+    });
       firebase.database().ref('/Doctors/'+doctorID).remove();
       window.alert("Delete Successfully");
      location.reload();

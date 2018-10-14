@@ -91,7 +91,7 @@
                  </div>
                  <br>
                  <br><br><br>
-                 <div class="column1"><div class="h3">Introduce</div><input id="introduce" type="text" placeholder="I am XXX, I has been work..." style="height: 30px; width: 400px;"></div>
+                 <div class="column1"><div class="h3">Introduce</div><textarea id="introduce"  placeholder="I am XXX, I has been work..." style="height: 200px; width: 400px;"></textarea></div>
                 
                
             </div>
@@ -121,6 +121,8 @@
     $("#lname").val(snapshot.val().Lastname);
     $("#number").val(snapshot.val().PhoneNum);
         $("#dob").val(snapshot.val().DOB);
+         $("#introduce").val(snapshot.val().Description);
+         
 
     
   });
@@ -133,7 +135,9 @@
         firebase.database().ref('Users/'+user.uid).update({
     Lastname: $("#lname").val(),
     Firstname: $("#fname").val(),
-    PhoneNum: $("#number").val()
+    PhoneNum: $("#number").val(),
+    DOB: $("#dob").val(),
+    Description: $("#introduce").val()
     
   });  
    window.alert("save successfully");
