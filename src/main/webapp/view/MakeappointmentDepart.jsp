@@ -102,7 +102,7 @@
           <form><input type="text" name="selecteddepartment" id="selectedDepart"value="" style="visibility:hidden"></form>
         </div></div>
         <div id="addDepart" class="boxright">
-           
+            <p>No Departments</p>
         </div>
     </div>
 

@@ -90,7 +90,7 @@
        <img src="../images/add.png" width="8%" height="30px">
                          </a></div>
              <div id="add">
-              No Doctors
+                 <p>No Doctors</p>
              </div>
          </div>
 

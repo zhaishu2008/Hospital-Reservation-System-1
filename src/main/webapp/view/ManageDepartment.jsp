@@ -92,7 +92,7 @@
        <img src="../images/add.png" width="8%" height="30px">
                          </a></div>
             <div id="addDepart">
-            
+             <p>No Departments</p>
         </div>
     </div>
 </div>
