@@ -83,7 +83,7 @@
          
          </div>
          
-         <div class="right" >Add User
+         <div class="right" >Add Department
             <br>
              <div class="text"><div class="h3">Department</div><input type="text" id="depart" placeholder="department" style="height: 30px;">
                 
@@ -107,22 +107,23 @@
     
 
    function addDepartment(){
-  firebase.auth().onAuthStateChanged(function(user){
-    if(user) {
+  
         var department = $("#depart").val();
-        var appointmentRef = firebase.database().ref('/Departments');
-    appointmentRef.push().set({
+        console.log(department);
+     var departmentRef = firebase.database().ref('/Departments');
+    departmentRef.push().set({
+    Name: department
     
-     Name: department
   }).then(function(){
     console.log("success");
+     window.alert("Add Department successfully");
+   window.location.href="ManageDepartment.jsp";
   }).catch(function(err){
     console.error("error：",err);
   });
         
-   window.alert("Add Department successfully");
-   window.location.href="ManageDepartment.jsp";
-  }}); 
+  
+ 
    }
    
 </script>

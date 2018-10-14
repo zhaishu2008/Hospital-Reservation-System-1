@@ -101,13 +101,13 @@
   <script>
       var departID;
       var doctorID;
-      function DeDoctor(dcName){
-         console.log("delete");
-         var departre = firebase.database().ref("Departments").orderByChild("Doctor").equalTo(
-               dcName);
+      function DeDoctor(dcName,dtName){
+        
+         var departre = firebase.database().ref("Departments").orderByChild("Name").equalTo(
+               dtName);
       departre.on("child_added", snap => { 
           departID = snap.key;
-          console.log(departID);
+            console.log(departID);
       });
       
       var doctorre = firebase.database().ref("Doctors").orderByChild("WholeName").equalTo(
@@ -160,7 +160,7 @@ console.log(ln);
      var len = ln.length;
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<div class="sbox"><div class="txt1"><div class="card"><div class="column3"><img src="qp.jpeg" alt="qp" style="width:100%"></div><div class="container" ><div class="column4"><div class="h4" ><p>'+dep[i]+'</p><p onclick="selectDoctor()">'
-           +fn[i]+' '+ln[i]+'</p><input type="button" onclick="DeDoctor('+"'"+dn[i]+"'"+')" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show Doctor Information<span class="popuptext" id="'+i+'">'
+           +fn[i]+' '+ln[i]+'</p><input type="button" onclick="DeDoctor('+"'"+dn[i]+"'"+","+"'"+dep[i]+"'"+')" value="Delect"></div></div></div></div><div class="txt2"><div class="h5"><div class="popup" onclick="myFunction('+i+')">Show Doctor Information<span class="popuptext" id="'+i+'">'
    +dp[i]+'</span></div></div></div></div></div><br>';
    }
    $("#add").html(addDepart);

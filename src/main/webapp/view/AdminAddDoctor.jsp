@@ -147,7 +147,12 @@
         firebase.database().ref('Departments/'+departID+'/Doctors').push().set({
     Doctor: wholeName
     
-  });  
+  }).then(function(){
+    console.log("success");
+  }).catch(function(err){
+    console.error("error：",err);
+  });
+  
         firebase.auth().onAuthStateChanged(function(user){
     if(user) {
         
