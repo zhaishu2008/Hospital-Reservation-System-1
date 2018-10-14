@@ -196,12 +196,8 @@
   var errorCode = error.code;
   var errorMessage = error.message;
   window.alert("Error: " + errorMessage);
-  return false;
-    });
-    
-  
-  
-        firebase.auth().onAuthStateChanged(function(user){
+  if (errorMessage==null){
+       firebase.auth().onAuthStateChanged(function(user){
     if(user) {
         firebase.database().ref('Departments/'+departID+'/Doctors').push().set({
     DoctorName: wholeName
@@ -232,6 +228,13 @@
         
    
   }}); 
+      
+  }
+    });
+    
+  
+  
+       
        
   
    }

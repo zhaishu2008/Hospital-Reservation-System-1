@@ -120,6 +120,7 @@ leadsRef.on('value', function(snapshot) {
         var time = childSnapshot.val().Time;
          var depart = childSnapshot.val().Department;
          var comments=childSnapshot.val().Comments;
+          var comments=childSnapshot.val().Comments;
      
      dn.push(doctorname);
      da.push(date);
@@ -127,12 +128,13 @@ leadsRef.on('value', function(snapshot) {
      dp.push(depart);
      co.push(comments);
      
+     
     });
     
      var len = dn.length;
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<button class="accordion" id="accordion" style="width: 550px;">Appointment '+(i+1)+'</button><div class="panel" style="text-align: left;"><p>Appointment<br>Date:  '
-   +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" onclick="delete('+"'"+co[i]+"'"+')" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
+   +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" onclick="delete('+"'"+co[i]+"',"+"'"+dn[i]+"'"+')" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
    }
    $("#add").html(addDepart);
    console.log("run");
@@ -158,24 +160,41 @@ for(var i=0;i<len; i++){
     
     
     var userappID;
-      var doctorID;
-      function delete(com){
+      var appID;
+      var dcID;
+       var dcappID;
+      
+      function delete(com,dcname){
          console.log("delete");
-         var departre = firebase.database().ref("Users/"+uuid+"/Appointments").orderByChild("Comments").equalTo(
+         var userap = firebase.database().ref("Users/"+uuid+"/Appointments").orderByChild("Comments").equalTo(
                com);
-      departre.on("child_added", snap => { 
+      userap.on("child_added", snap => { 
           userappID = snap.key;
           console.log(userappID);
       });
       
-      var doctorre = firebase.database().ref("Doctors").orderByChild("WholeName").equalTo(
-               dcName);
-      doctorre.on("child_added", snap => { 
-          doctorID = snap.key;
-          console.log(doctorID);
+      var ap = firebase.database().ref("Appointments").orderByChild("Comments").equalTo(
+               com);
+      ap.on("child_added", snap => { 
+          appID = snap.key;
+          console.log(appID);
       });
-     /* firebase.database().ref('/Departments/'+departID).remove();*/
-      firebase.database().ref('/Doctors/'+doctorID).remove();
+      
+       var docap = firebase.database().ref("Doctors").orderByChild("WholeName").equalTo(
+               dcname);
+      docap.on("child_added", snap => { 
+          dcID = snap.key;
+          console.log(dcID);
+      });
+       var docapp = firebase.database().ref("Doctors/"+dcID+"/Appointments").orderByChild("Comments").equalTo(
+               com);
+      docapp.on("child_added", snap => { 
+          dcappID = snap.key;
+          console.log(dcappID);
+      });
+     firebase.database().ref('Users/'+uuid+'/Appointments/'+userappID).remove();
+      firebase.database().ref('Appointments/'+appID).remove();
+      firebase.database().ref('Doctors/'+dcID+'/Appointments/'+dcappID).remove();
       window.alert("Delete Successfully");
      location.reload();
           
