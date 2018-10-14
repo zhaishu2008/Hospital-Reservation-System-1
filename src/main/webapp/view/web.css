@@ -158,6 +158,12 @@ background-color:#5574F7;
     
 }
 
+.divcss5 {}
+.divcss5 a:link { text-decoration: none;color: blue} 
+.divcss5  a:hover { text-decoration:underline;color: red} 
+.divcss5  a:active { text-decoration:blink} 
+.divcss5  a:visited { text-decoration: none;color: green} 
+
 .column{
     float: left;
     width: 25%;

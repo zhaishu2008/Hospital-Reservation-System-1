@@ -150,36 +150,8 @@
         var previous = document.referrer;
         
         
-    if(previous.indexOf("Selct")>0)
-   {
-       window.alert("please select department and doctor");
-   }
-   else
-   {
         
 $("#comfirm").click(function(){
-    var doctorId;
-    var hasTime;
-    var hasDate;
-    var time = $("#Time").val();
-    var date = $("#Date").val();
-  var doctorName =  $("#doctor").text();
-  
- var go = firebase.database().ref("/Appointments").orderByChild("WholeName").equalTo(
-               doctorName);
-      go.on("child_added", snap => { 
-          hasTime = snap.child("Time").val();
-          hasDate = snap.child("Date").val();
-          doctorId = snap.key;
-          console.log(hasTime);
-            console.log(hasDate);
-        
-      });
-    if (hasTime==time&&hasDate==date){
-       alert("This doctor is bussy in this time");
-       return false;
-    }
-    
     firebase.database().ref('/Users/' + user.uid).once('value').then(function(snapshot) {
     var firstname = snapshot.val().Firstname;
     var lastname = snapshot.val().Lastname;
@@ -194,8 +166,8 @@ $("#comfirm").click(function(){
     Time: $("#Time").val(),
     Date: $("#Date").val(),
     Comments: $("#comments").val(),
-    DoctorName: $("#doctor").text(),
-    Department: $("#depart").text()
+    DoctorName: $("#depart").text(),
+    Department: $("#doctor").text()
   }).then(function(){
     console.log("success");
   }).catch(function(err){
@@ -244,7 +216,7 @@ $("#comfirm").click(function(){
   });
 
 });});
-}}});
+}});
 
 
 window.onload = load();

@@ -93,7 +93,7 @@
 
     </div>
     <div class="right" >Booking Now
-        <div class="text"><br><br><div class="h3"><a id="depart" onclick="makeAppointment()" href="MakeappointmentDepart.jsp">Make an appointment</a></div>
+        <div class="text"><br><br><div class="h3"><a id="depart" class="divcss5" onclick="makeAppointment()" href="MakeappointmentDepart.jsp">Make an appointment</a></div>
           <br>
          
           </div>

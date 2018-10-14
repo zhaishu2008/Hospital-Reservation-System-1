@@ -134,7 +134,7 @@ leadsRef.on('value', function(snapshot) {
      var len = dn.length;
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<button class="accordion" id="accordion" style="width: 550px;">Appointment '+(i+1)+'<span style="white-space:pre;">'+'       '+da[i]+'         '+tm[i]+'</span></button><div class="panel" style="text-align: left;"><p>Appointment<br>Date:  '
-   +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" onclick="delete('+"'"+co[i]+"',"+"'"+dn[i]+"'"+')" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
+   +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" onclick="dele('+"'"+co[i]+"',"+"'"+dn[i]+"'"+')" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
    }
    $("#add").html(addDepart);
    console.log("run");
@@ -164,7 +164,7 @@ for(var i=0;i<len; i++){
       var dcID;
        var dcappID;
       
-      function delete(com,dcname){
+      function dele(com,dcname){
          console.log("delete");
          var userap = firebase.database().ref("Users/"+uuid+"/Appointments").orderByChild("Comments").equalTo(
                com);

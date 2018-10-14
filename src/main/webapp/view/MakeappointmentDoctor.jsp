@@ -95,13 +95,13 @@
      </div>
      <div class="right" >
          <div class="boxleft">Booking Now
-             <div class="text"><br><br><div class="h3"><a id="depart" onclick="selectDepart()" href="MakeappointmentDepart.jsp">dddd</a></div>
+             <div class="text"><br><br><div class="h3"><a id="depart" class="divcss5" onclick="selectDepart()" href="MakeappointmentDepart.jsp">dddd</a></div>
              <div class="h3">Back to Select Department</div>
            <br>
                  
            <br>
          
-                     <form><input type="text" name="selecteddoctor" id="selectedDoctor"value="dd" style="visibility:hidden"></form>
+                     <form><input type="text" name="selecteddoctor" id="selectedDoctor"value="" style="visibility:hidden"></form>
 
          </div></div>
          <div class="boxright" id="add">
