@@ -141,35 +141,35 @@ margin-left: auto; margin-right: auto; margin-top: 10%; margin-bottom: auto; tex
                       
                       if(firstname===""){
            alert("The First Name cannot be empty");
-           firstname.focus();
+           firstname.val().focus();
            return false;
            
        }else
            
        if(lastname===""){
            alert("The Last Name cannot be empty");
-           lastname.focus();
+           lastname.val().focus();
            return false;
            
        }else
        
        if(num===""){
            alert("The Number cannot be empty");
-          num.focus();
+          num.val().focus();
            return false;
            
        }else
            
        if(useremail===""){
            alert("The Email cannot be empty");
-          useremail.focus();
+          useremail.val().focus();
            return false;
            
        }else
        
        if(userpassword===""){
            alert("The Password cannot be empty");
-          userpassword.focus();
+          userpassword.val().focus();
            return false;
            
        }

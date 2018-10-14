@@ -187,43 +187,48 @@
           console.log(departID);
         
       });
-       var errorMessage = " ";
+       
        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
-                      
-     firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+                      var lastname = $("#lname").val();
+                      var firstname = $("#fname").val();
+                      var num = $("#number").val();
+                      var gender = $("input:radio[name='gender']:checked").val();
+                      var dob = $("#dob").val();
+                      var descrip = $("#description").val();
+                      var iss = 1;
+    var errorMessage = 0;
+    firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
  
   var errorCode = error.code;
- errorMessage = error.message;
- 
+  errorMessage = error.message;
   window.alert("Error: " + errorMessage);
-   });
-  if (errorMessage===" "){
+  
+    });
+    
+  if (errorMessage==0){
+       console.log("do");
        firebase.auth().onAuthStateChanged(function(user){
     if(user) {
         console.log(user.uid);
-        firebase.database().ref('Departments/'+departID+'/Doctors/').push().set({
+        firebase.database().ref('Departments/'+departID+'/Doctors/'+user.uid).set({
     DoctorName: wholeName
     
-  }).then(function(){
-    console.log("success");
-  }).catch(function(err){
-    console.error("error：",err);
   });
         
         console.log(wholeName);
-        firebase.database().ref('Doctors/').push().set({
+        firebase.database().ref('Doctors/'+user.uid).set({
     Email: useremail,
      Password: userpassword,
-    Lastname: $("#lname").val(),
-    Firstname: $("#fname").val(),
-    PhoneNum: $("#number").val(),
+    Lastname: lastname,
+    Firstname: firstname,
+    PhoneNum: num,
     WholeName: wholeName,
     Department: depart,
-    Gender: $("input:radio[name='gender']:checked").val(),
-    isstaff: "1",
-     DOB: $("#dob").val(),
-      Description: $("#description").val()
+    Gender: gender,
+    isstaff: iss,
+     DOB: dob,
+      Description: descrip
   });   
     
     window.alert("Add Doctor successfully");

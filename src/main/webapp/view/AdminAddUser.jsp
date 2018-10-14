@@ -160,17 +160,25 @@
       
        var useremail = $("#loginEmail").val();
                       var userpassword = $("#loginPassword").val();
-                      
-   var errorMessage =" ";
-     firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
- 
+                       var userpassword = $("#loginPassword").val();
+                      var lastname = $("#lname").val();
+                      var firstname = $("#fname").val();
+                      var num = $("#number").val();
+                      var gender = $("input:radio[name='gender']:checked").val();
+                      var dob = $("#dob").val();
+                       var isstaff = 0;
+                       
+   var errorMessage = 0;
+   firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
+  // Handle Errors here.
   var errorCode = error.code;
   errorMessage = error.message;
   window.alert("Error: " + errorMessage);
-  
-  
-    });
-   if (errorMessage==" "){
+  console.log(errorMessage);
+  // ...
+});
+     
+   if (errorMessage==1){
   firebase.auth().onAuthStateChanged(function(user){
       console.log(user.uid);
     if(user) {
@@ -178,14 +186,14 @@
         firebase.database().ref('Users/'+user.uid).set({
     Email: useremail,
     Password: userpassword,
-    Lastname: $("#lname").val(),
-    Firstname: $("#fname").val(),
-    PhoneNum: $("#number").val(),
-    Gender: $("input:radio[name='gender']:checked").val(),
-    DOB: $("#dob").val(),
-    IsStaff: "0"
+    Lastname: lastname,
+    Firstname: firstname,
+    PhoneNum: num,
+    Gender: gender,
+    DOB: dob,
+    IsStaff: isstaff
   });   
-     window.alert("Sign up successfully");
+     window.alert("Add User successfully");
   window.location.href='ManageUser.jsp';
 
  }
