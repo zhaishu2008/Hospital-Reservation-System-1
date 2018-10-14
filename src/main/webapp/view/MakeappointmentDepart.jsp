@@ -176,7 +176,7 @@ leadsRef.on('value', function(snapshot) {
      console.log(myArray);
      var len = myArray.length;
 for(var i=0;i<len; i++){
-   addDepart = addDepart + '<div class="h6" onclick="selectDepart()">'+ myArray[i]+"</div><br>";
+   addDepart = addDepart + '<div class="h6" onclick="selectDepart()">'+myArray[i]+"</div><br>";
    }
    $("#addDepart").html(addDepart);
 });

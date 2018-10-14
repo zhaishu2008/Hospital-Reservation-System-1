@@ -145,7 +145,7 @@
   window.alert("Error: " + errorMessage);
     });
         firebase.database().ref('Departments/'+departID+'/Doctors').push().set({
-    Doctor: wholeName
+    DoctorName: wholeName
     
   }).then(function(){
     console.log("success");

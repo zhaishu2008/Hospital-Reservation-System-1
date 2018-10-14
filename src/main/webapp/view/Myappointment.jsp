@@ -51,8 +51,10 @@
 
 
     <script>
+        var uuid;
    firebase.auth().onAuthStateChanged(function(user){
     if(user) {
+        uuid = user.uid;
         $("#logout").click(function(){firebase.auth().signOut().then(function() {
  window.alert("Log out successfully");
  window.location.href="../index.jsp";
@@ -130,7 +132,7 @@ leadsRef.on('value', function(snapshot) {
      var len = dn.length;
 for(var i=0;i<len; i++){
    addDepart = addDepart + '<button class="accordion" id="accordion" style="width: 550px;">Appointment '+(i+1)+'</button><div class="panel" style="text-align: left;"><p>Appointment<br>Date:  '
-   +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" onclick="delete()" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
+   +da[i]+"<br>Time: "+tm[i]+"<br>Doctor: "+dn[i]+"<br>Department: "+dp[i]+"<br>Comments: "+co[i]+'<br><input type="button" onclick="delete('+"'"+co[i]+"'"+')" value="Delect" style="width: 100px; font-size: 50px;"></p></div><br>';
    }
    $("#add").html(addDepart);
    console.log("run");
@@ -154,15 +156,16 @@ for(var i=0;i<len; i++){
  
     }
     
-    var departID;
+    
+    var userappID;
       var doctorID;
-      function DeDoctor(dcName){
+      function delete(com){
          console.log("delete");
-         var departre = firebase.database().ref("Departments").orderByChild("Doctor").equalTo(
-               dcName);
+         var departre = firebase.database().ref("Users/"+uuid+"/Appointments").orderByChild("Comments").equalTo(
+               com);
       departre.on("child_added", snap => { 
-          departID = snap.key;
-          console.log(departID);
+          userappID = snap.key;
+          console.log(userappID);
       });
       
       var doctorre = firebase.database().ref("Doctors").orderByChild("WholeName").equalTo(
@@ -176,7 +179,7 @@ for(var i=0;i<len; i++){
       window.alert("Delete Successfully");
      location.reload();
           
-      }
+      };
 
 
     
