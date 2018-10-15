@@ -108,7 +108,7 @@
                   More efficient appointment system for patients to make an reservation in their available time. 
                  <br/>
                  Specific doctors can
-                  be selected by patients. 
+                 be selected by patients. 
          
            </p>
            </div>
