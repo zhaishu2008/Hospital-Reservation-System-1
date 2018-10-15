@@ -160,14 +160,36 @@ $("#comfirm").click(function(){
       var comments =  $("#comments").val();
        var departname = $("#depart").text();
        var doctorname = $("#doctor").text();
-       
+      var tm = new Array();
+      var dt=new Array();
     
-    writeNewPost(user.uid, patientname, time, date, comments, doctorname, departname);
+    var h = firebase.database().ref('Appointments').orderByChild('DoctorName').equalTo(
+               doctorname);
+     h.once('value', function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    var hastime = childSnapshot.val().Time;
+    var hasdate = childSnapshot.val().Date;
+   tm.push(hastime);
+   dt.push(hasdate);
+   
+  });
+  console.log(tm);
+  console.log(dt);
+  
+  if (tm.indexOf(time)!=-1&&tm.indexOf(time)==dt.indexOf(date)){
+           window.alert("The doctor is bussy in this time, please choose other time.");
+           
+       }
+      else
+      { writeNewPost(user.uid, patientname, time, date, comments, doctorname, departname);
     window.alert("Successful Appoinment");
-   window.location.href='MakeappointmentHome.jsp';
-    
+   window.location.href='MakeappointmentHome.jsp';}
+});
+      
+       
+       
      
-    
+     
  
 
 });});
@@ -209,6 +231,7 @@ console.log(txt);
     Comments: comments,
     DoctorName: doctorname,
     Department: departname
+    
   };
     var doc = firebase.database().ref('Doctors').orderByChild('WholeName').equalTo(
                doctorname);
