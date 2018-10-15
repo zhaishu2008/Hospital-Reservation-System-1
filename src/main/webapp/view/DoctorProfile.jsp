@@ -116,7 +116,7 @@
     
   var uid = user.uid;
   
-     firebase.database().ref('/Users/' + uid).once('value').then(function(snapshot) {
+     firebase.database().ref('/Doctors/' + uid).once('value').then(function(snapshot) {
     $("#fname").val(snapshot.val().Firstname);
     $("#lname").val(snapshot.val().Lastname);
     $("#number").val(snapshot.val().PhoneNum);
@@ -132,7 +132,7 @@
    function update(){
   firebase.auth().onAuthStateChanged(function(user){
     if(user) {
-        firebase.database().ref('Users/'+user.uid).update({
+        firebase.database().ref('Doctors/'+user.uid).update({
     Lastname: $("#lname").val(),
     Firstname: $("#fname").val(),
     PhoneNum: $("#number").val(),

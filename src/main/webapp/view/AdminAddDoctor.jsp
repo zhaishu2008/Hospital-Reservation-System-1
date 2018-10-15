@@ -90,8 +90,11 @@
                  <div class="column"><div class="h3">Last Name</div><input id="lname" type="text" placeholder="Your Last name" style="height: 30px;">
                  <div class="h3">Dob</div><input id="dob" type="date" value="1990-08-26" style="height: 30px;">
                  <div class="h3">Password</div><input id="loginPassword" type="text" placeholder="password" style="height: 30px;">
-            </div>
-                 <div class="h3">description</div><textarea id="description" rows="4" cols="40"></textarea>
+                 <div class="h3">description</div>
+                 
+                 </div>
+                
+                 <textarea id="description" rows="4" cols="40"></textarea>
                  <div class="h3">Gender</div>
                  <label class="radio-inline">
   <input type="radio" name="gender" id="sex1" value="male" checked="checked"> Male
@@ -204,27 +207,20 @@
       });
        
       
-    var errorMessage =" ";
-    firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
- 
-  var errorCode = error.code;
-  errorMessage = error.message;
-  window.alert("Error: " + errorMessage);
-  
-    });
+   
     
-  if (errorMessage==" "){
-       console.log("do");
-       firebase.auth().onAuthStateChanged(function(user){
-    if(user) {
-        console.log(user.uid);
-        firebase.database().ref('Departments/'+departID+'/Doctors/'+user.uid).set({
+    firebase.auth().createUserWithEmailAndPassword(useremail, userpassword)
+.then(function(data){
+  
+
+ console.log(data.user.uid);
+        firebase.database().ref('Departments/'+departID+'/Doctors/'+data.user.uid).set({
     DoctorName: wholeName
     
   });
         
         console.log(wholeName);
-        firebase.database().ref('Doctors/'+user.uid).set({
+        firebase.database().ref('Doctors/'+data.user.uid).set({
     Email: useremail,
      Password: userpassword,
     Lastname: lastname,
@@ -241,16 +237,12 @@
     
     window.alert("Add Doctor successfully");
     window.location.href="ManageDoctor.jsp";
-        
-   
-  }}); 
-      
-  }
-   
-    
+}).catch(function(error) {
+    var errorCode = error.code;
+  errorMessage = error.message;
+  window.alert("Error: " + errorMessage);
+});
   
-  
-       
        
   
    }

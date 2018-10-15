@@ -174,19 +174,10 @@
        }
            
            
-      var errorMessage =" ";
-    firebase.auth().createUserWithEmailAndPassword(useremail, userpassword).catch(function(error) {
- 
-  var errorCode = error.code;
-  errorMessage = error.message;
-  window.alert("Error: " + errorMessage);
-  
-    });
-   if (errorMessage==" "){
-  firebase.auth().onAuthStateChanged(function(user){
-    if(user) {
-        console.log(user.uid);
-        firebase.database().ref('Users/'+user.uid).set({
+     firebase.auth().createUserWithEmailAndPassword(useremail, userpassword)
+.then(function(data){
+  console.log(data.user.uid);
+        firebase.database().ref('Users/'+data.user.uid).set({
     Email: useremail,
     Password: userpassword,
     Lastname: lastname,
@@ -194,23 +185,25 @@
     PhoneNum: num,
     Gender: gender,
     DOB: dob,
-    Uid: user.uid,
+    Uid: data.user.uid,
     IsStaff: isstaff      
        });   
      window.alert("Sign up successfully");
   window.location.href='ManageUser.jsp';
-
- }
-  
+  }).catch(function(error) {
+    var errorCode = error.code;
+  errorMessage = error.message;
+  window.alert("Error: " + errorMessage);
 });
-           
-   }}
+  
    
-   function isEmail( str ){  
-    var myReg = /^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/; 
-    if(myReg.test(str)) return true; 
-    return false; 
-}
+  
+   
+  
+
+           
+   }
+   
    
 </script>
   </body>
