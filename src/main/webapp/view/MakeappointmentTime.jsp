@@ -147,7 +147,6 @@
 
  firebase.auth().onAuthStateChanged(function(user){
     if(user) {
-        var previous = document.referrer;
         
         
         
@@ -156,64 +155,20 @@ $("#comfirm").click(function(){
     var firstname = snapshot.val().Firstname;
     var lastname = snapshot.val().Lastname;
     var patientname = firstname+" "+lastname;
+    var time =  $("#Time").val();
+     var date =  $("#Date").val();
+      var comments =  $("#comments").val();
+       var departname = $("#depart").text();
+       var doctorname = $("#doctor").text();
+       
     
-   console.log($("#depart").text());
+    writeNewPost(user.uid, patientname, time, date, comments, doctorname, departname);
+    window.alert("Successful Appoinment");
+   window.location.href='MakeappointmentHome.jsp';
     
-        var appointmentRef = firebase.database().ref('/Appointments');
-    appointmentRef.push().set({
-    uid: user.uid,
-    Patient: patientname,
-    Time: $("#Time").val(),
-    Date: $("#Date").val(),
-    Comments: $("#comments").val(),
-    DoctorName: $("#depart").text(),
-    Department: $("#doctor").text()
-  }).then(function(){
-    console.log("success");
-  }).catch(function(err){
-    console.error("error：",err);
-  });
-  var userappointmentRef = firebase.database().ref('/Users/'+user.uid+"/Appointments");
-    userappointmentRef.push().set({
-    Time: $("#Time").val(),
-    Date: $("#Date").val(),
-    Comments: $("#comments").val(),
-    DoctorName: $("#doctor").text(),
-    Department: $("#depart").text()
-  }).then(function(){
-    console.log("success");
+     
     
-  }).catch(function(err){
-    console.error("error：",err);
-  });
-  
-  var doctorId;
-  var doctorName =  $("#doctor").val;
-  
- var hey = firebase.database().ref("/Doctors").orderByChild("WholeName").equalTo(
-               doctorName);
-      hey.on("child_added", snap => { 
-          doctorId = snap.key;
-          console.log(doctorId);
-        
-      });
-    
-  
-   var doctorappointmentRef = firebase.database().ref('/Doctors/'+doctorId+'/Appointments');
-    doctorappointmentRef.push().set({
-    uid: user.uid,
-    Patient: patientname,
-    Time: $("#Time").val(),
-    Date: $("#Date").val(),
-    Comments: $("#comments").val()
-    
-  }).then(function(){
-    console.log("success");
-     window.alert("Making appointment successfully");
-  window.location.href="MakeappointmentHome.jsp";
-  }).catch(function(err){
-    console.error("error：",err);
-  });
+ 
 
 });});
 }});
@@ -243,6 +198,36 @@ console.log(txt);
     }
 });
 }
+  </script>
+  <script>
+      function writeNewPost(uid, patientname, time, date, comments, doctorname, departname) {
+    var postData = {
+   Patientuid: uid,
+    Patient: patientname,
+    Time: time,
+    Date: date,
+    Comments: comments,
+    DoctorName: doctorname,
+    Department: departname
+  };
+    var doc = firebase.database().ref('Doctors').orderByChild('WholeName').equalTo(
+               doctorname);
+     doc.on("child_added", snap => { 
+       var doctorId = snap.key;
+          console.log(doctorId);
+      var newPostKey = firebase.database().ref().child('Appointments').push().key;
+  var updates = {};
+  updates['/Appointments/' + newPostKey] = postData;
+  updates['/Users/' + uid + '/Appointments/'+newPostKey] = postData;
+  updates['/Doctors/' + doctorId + '/Appointments/'+newPostKey] = postData;
+console.log("success to save data ");
+        
+        firebase.database().ref().update(updates);
+        });
+  
+    }
+    
+   
   </script>
 
     </body>

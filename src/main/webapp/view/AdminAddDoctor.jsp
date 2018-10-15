@@ -224,7 +224,7 @@
   });
         
         console.log(wholeName);
-        firebase.database().ref('Doctors').push().set({
+        firebase.database().ref('Doctors/'+user.uid).set({
     Email: useremail,
      Password: userpassword,
     Lastname: lastname,
@@ -236,10 +236,7 @@
     isstaff: iss,
      DOB: dob,
       Description: descrip
-  }).then(function(){
-    console.log("success");
-  }).catch(function(err){
-    console.error("error：",err);
+ 
   });   
     
     window.alert("Add Doctor successfully");
